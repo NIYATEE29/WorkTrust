@@ -80,7 +80,7 @@ export default function TeamPage() {
 
         <div style={{ marginBottom: "1rem" }}>
           <GraphSearchBar onFilterChange={setGraphFilter} />
-          <TrustGraph graphData={graph} nameFilter={graphFilter} />
+          <TrustGraph graphData={graph} nameFilter={graphFilter} teamOnlyMode={true} highlightNodeId={id} />
         </div>
 
         <h2 style={{ fontSize: "1.1rem" }}>Members</h2>
