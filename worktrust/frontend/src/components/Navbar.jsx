@@ -31,18 +31,23 @@ export default function Navbar() {
   return (
     <header
       style={{
-        background: "linear-gradient(90deg, #0a0a18 0%, #12122a 50%, #0a0a18 100%)",
+        background: "linear-gradient(90deg, #0d0812 0%, #1a0a26 50%, #0d0812 100%)",
         color: "var(--text)",
         padding: "0.75rem 1.25rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        boxShadow: "var(--shadow), var(--glow-cyan)",
-        borderBottom: "1px solid rgba(34, 211, 238, 0.15)",
+        boxShadow: "var(--shadow), var(--glow-magenta)",
+        borderBottom: "1px solid rgba(244, 114, 182, 0.2)",
       }}
     >
-      <Link to="/" style={{ color: "var(--neon-cyan)", fontWeight: 700, fontSize: "1.15rem", textShadow: "0 0 12px var(--neon-cyan-dim)" }}>
-        WorkTrust
+      <Link to="/" style={{ display: "flex", flexDirection: "column", gap: "1px", textDecoration: "none" }}>
+        <span style={{ color: "var(--neon-magenta)", fontWeight: 800, fontSize: "1.2rem", textShadow: "var(--glow-magenta)", letterSpacing: "0.02em" }}>
+          WorkTrust
+        </span>
+        <span style={{ color: "var(--text-muted)", fontSize: "0.68rem", fontWeight: 400, letterSpacing: "0.04em" }}>
+          for women, by design
+        </span>
       </Link>
       <nav style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}>
         {isAuthenticated ? (

@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
 import CompanyCard from "../components/CompanyCard";
 import UserCard from "../components/UserCard";
+import MissionBanner from "../components/MissionBanner";
 import { apiGetCompanies, apiGetUsers, apiSearch } from "../api";
 
 export default function SearchPage() {
@@ -73,6 +74,7 @@ export default function SearchPage() {
     <>
       <Navbar />
       <div className="wt-container">
+        <MissionBanner />
         <SearchBar
           onSearch={onSearch}
           onImmediateChange={setLiveQuery}

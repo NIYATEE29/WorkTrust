@@ -35,9 +35,24 @@ export default function Login() {
   return (
     <>
       <Navbar />
-      <div className="wt-container" style={{ maxWidth: 460, marginTop: "4rem" }}>
+      <div className="wt-container" style={{ maxWidth: 460, marginTop: "3rem" }}>
+        <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
+          <p style={{
+            fontStyle: "italic",
+            color: "var(--text-muted)",
+            fontSize: "0.95rem",
+            margin: "0 auto",
+            maxWidth: 360,
+            lineHeight: 1.6,
+            borderLeft: "3px solid var(--neon-magenta)",
+            paddingLeft: "0.85rem",
+            textAlign: "left",
+          }}>
+            "Every woman deserves to know if a workplace is safe before she walks through the door."
+          </p>
+        </div>
         <div className="wt-card">
-          <h1 style={{ marginTop: 0, textAlign: "center", color: "var(--neon-cyan)", textShadow: "var(--glow-cyan)" }}>
+          <h1 style={{ marginTop: 0, textAlign: "center", color: "var(--neon-magenta)", textShadow: "var(--glow-magenta)" }}>
             Welcome Back
           </h1>
           <p className="wt-muted" style={{ textAlign: "center", marginBottom: "2rem" }}>Log in to access your trust dashboard.</p>
