@@ -48,5 +48,22 @@ def build_graph(dataset: dict) -> nx.MultiDiGraph:
             edge_type=rel["edge_type"],
             weight=rel["weight"],
         )
+            # --- Add structural edges (VERY IMPORTANT) ---
+
+    # user → team
+    for user in dataset["users"]:
+        G.add_edge(
+            user["id"],
+            user["team_id"],
+            edge_type="belongs_to"
+        )
+
+    # team → company
+    for team in dataset["teams"]:
+        G.add_edge(
+            team["id"],
+            team["company_id"],
+            edge_type="belongs_to"
+        )
 
     return G
