@@ -8,7 +8,7 @@ import uuid
 import networkx as nx
 
 # MongoDB connection
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=2000)
 db = client["worktrust"]
 # Collections
 companies_col = db["companies"]
@@ -43,7 +43,9 @@ def get_dataset() -> dict:
         _load()
     return _dataset
 
+
 def get_graph() -> nx.MultiDiGraph:
+    global _graph
     if _graph is None:
         _load()
     return _graph
@@ -84,11 +86,17 @@ def register_new_user(name: str, role: str, company_id: str, team_id: str | None
         team_id=team_id,
         company_id=company_id,
     )
-    
+
     # Add structural edges for visualization and hierarchy
     if team_id:
         G.add_edge(uid, team_id, edge_type="member", weight=0.0)
     elif company_id:
         G.add_edge(uid, company_id, edge_type="member", weight=0.0)
-        
+
+    # Persist to MongoDB
+    try:
+        users_col.insert_one(row.copy())
+    except Exception:
+        pass
+
     return uid

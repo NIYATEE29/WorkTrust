@@ -25,7 +25,7 @@ function nodeFill(n) {
 }
 
 function edgeNeon(d) {
-  if (d.edge_type === "review") return (d.weight || 0) >= 0 ? NEON.green : NEON.red;
+  // if (d.edge_type === "review") return (d.weight || 0) >= 0 ? NEON.green : NEON.red;
   if (d.edge_type === "friend") return NEON.magenta;
   if (d.edge_type === "colleague") return NEON.cyan;
   if (d.edge_type === "manager") return NEON.orange;
@@ -218,30 +218,30 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
         }}
       />
       <div style={{
-          position: "absolute", bottom: "1rem", left: "1rem",
-          background: "rgba(15, 15, 26, 0.85)", border: "1px solid var(--border)",
-          padding: "0.75rem", borderRadius: "var(--radius)", fontSize: "0.8rem",
-          color: "var(--text)", backdropFilter: "blur(6px)", pointerEvents: "none",
-          boxShadow: "var(--shadow)"
+        position: "absolute", bottom: "1rem", left: "1rem",
+        background: "rgba(15, 15, 26, 0.85)", border: "1px solid var(--border)",
+        padding: "0.75rem", borderRadius: "var(--radius)", fontSize: "0.8rem",
+        color: "var(--text)", backdropFilter: "blur(6px)", pointerEvents: "none",
+        boxShadow: "var(--shadow)"
       }}>
         <div style={{ fontWeight: 600, marginBottom: "0.5rem", color: "var(--neon-cyan)" }}>Graph Legend</div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 0, borderTop: "2px dashed var(--trust-pos)" }}/> Positive Review
+          <div style={{ width: 16, height: 0, borderTop: "2px dashed var(--trust-pos)" }} /> Positive Review
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 0, borderTop: "2px dashed var(--trust-neg)" }}/> Negative Review
+          <div style={{ width: 16, height: 0, borderTop: "2px dashed var(--trust-neg)" }} /> Negative Review
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 2, background: "var(--neon-magenta)" }}/> Friend
+          <div style={{ width: 16, height: 2, background: "var(--neon-magenta)" }} /> Friend
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 2, background: "var(--neon-cyan)" }}/> Colleague
+          <div style={{ width: 16, height: 2, background: "var(--neon-cyan)" }} /> Colleague
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 2, background: "#fb923c" }}/> Manager
+          <div style={{ width: 16, height: 2, background: "#fb923c" }} /> Manager
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <div style={{ width: 16, height: 2, background: "#38bdf8" }}/> Structural Link
+          <div style={{ width: 16, height: 2, background: "#38bdf8" }} /> Structural Link
         </div>
       </div>
     </div>
