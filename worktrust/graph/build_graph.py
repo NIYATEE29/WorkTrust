@@ -14,22 +14,22 @@ def build_graph(dataset: dict) -> nx.MultiDiGraph:
     G = nx.MultiDiGraph()
 
     # --- Add company nodes ---
-    for company in dataset["companies"]:
+    for company in dataset.get("companies", []):
         G.add_node(company["id"], type="company", name=company["name"])
 
     # --- Add team nodes ---
-    for team in dataset["teams"]:
+    for team in dataset.get("teams", []):
         G.add_node(team["id"], type="team", name=team["name"],
                    company_id=team["company_id"])
 
     # --- Add user nodes ---
-    for user in dataset["users"]:
+    for user in dataset.get("users", []):
         G.add_node(user["id"], type="user", name=user["name"],
                    role=user["role"], team_id=user["team_id"],
                    company_id=user["company_id"])
 
     # --- Add review edges ---
-    for review in dataset["reviews"]:
+    for review in dataset.get("reviews", []):
         G.add_edge(
             review["reviewer_id"],
             review["target_id"],
@@ -41,7 +41,7 @@ def build_graph(dataset: dict) -> nx.MultiDiGraph:
         )
 
     # --- Add relation edges (friend / colleague / manager) ---
-    for rel in dataset["relations"]:
+    for rel in dataset.get("relations", []):
         G.add_edge(
             rel["from_id"],
             rel["to_id"],
