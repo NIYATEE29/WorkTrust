@@ -175,380 +175,380 @@
       "target_id": "user_8",
       "target_type": "individual",
       "raw_text": "This person is a bully and made everyone uncomfortable",
-      "sentiment": -0.35,
+      "sentiment": -0.571,
       "category": "Safety & Harassment",
       "toxic": true,
-      "weight": -0.35
+      "weight": -0.571
     },
     {
       "reviewer_id": "user_8",
       "target_id": "user_5",
       "target_type": "individual",
       "raw_text": "Abusive manager who discriminated against team members openly",
-      "sentiment": 0.3,
+      "sentiment": -0.596,
       "category": "General",
       "toxic": true,
-      "weight": 0.3
+      "weight": -0.596
     },
     {
       "reviewer_id": "user_1",
       "target_id": "company_A",
       "target_type": "company",
       "raw_text": "Leadership genuinely cares about the team",
-      "sentiment": 0.0,
+      "sentiment": 0.633,
       "category": "General",
       "toxic": false,
-      "weight": 0.0
+      "weight": 0.633
     },
     {
       "reviewer_id": "user_2",
       "target_id": "team_A2",
       "target_type": "team",
       "raw_text": "Excellent mentor, helped me grow my skills",
-      "sentiment": 0.3,
+      "sentiment": 0.789,
       "category": "Inclusion & Support",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.789
     },
     {
       "reviewer_id": "user_3",
       "target_id": "user_4",
       "target_type": "individual",
       "raw_text": "Great collaborator, always supportive",
-      "sentiment": 0.6,
+      "sentiment": 0.801,
       "category": "Inclusion & Support",
       "toxic": false,
-      "weight": 0.6
+      "weight": 0.801
     },
     {
       "reviewer_id": "user_4",
       "target_id": "team_A3",
       "target_type": "team",
       "raw_text": "Gender bias in hiring and promotion is obvious",
-      "sentiment": -0.7,
+      "sentiment": -0.643,
       "category": "Bias / Microaggression",
       "toxic": true,
-      "weight": -0.7
+      "weight": -0.643
     },
     {
       "reviewer_id": "user_5",
       "target_id": "team_B3",
       "target_type": "team",
       "raw_text": "No growth opportunities, stuck doing the same work",
-      "sentiment": -0.05,
+      "sentiment": -0.763,
       "category": "Career Growth",
-      "toxic": false,
-      "weight": -0.05
+      "toxic": true,
+      "weight": -0.763
     },
     {
       "reviewer_id": "user_6",
       "target_id": "user_15",
       "target_type": "individual",
       "raw_text": "Fair compensation with regular raises",
-      "sentiment": 0.3,
+      "sentiment": 0.292,
       "category": "Career Growth",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.292
     },
     {
       "reviewer_id": "user_7",
       "target_id": "user_10",
       "target_type": "individual",
       "raw_text": "No mentorship, no learning, no career path",
-      "sentiment": 0.9,
+      "sentiment": -0.682,
       "category": "Inclusion & Support",
-      "toxic": false,
-      "weight": 0.9
+      "toxic": true,
+      "weight": -0.682
     },
     {
       "reviewer_id": "user_10",
       "target_id": "company_B",
       "target_type": "company",
       "raw_text": "Great collaborator, always supportive",
-      "sentiment": 0.6,
+      "sentiment": 0.801,
       "category": "Inclusion & Support",
       "toxic": false,
-      "weight": 0.6
+      "weight": 0.801
     },
     {
       "reviewer_id": "user_11",
       "target_id": "user_15",
       "target_type": "individual",
       "raw_text": "Inclusive workplace with collaborative spirit",
-      "sentiment": 0.6,
+      "sentiment": 0.761,
       "category": "Inclusion & Support",
       "toxic": false,
-      "weight": 0.6
+      "weight": 0.761
     },
     {
       "reviewer_id": "user_12",
       "target_id": "user_7",
       "target_type": "individual",
       "raw_text": "Unfair treatment, clear bias in promotion decisions",
-      "sentiment": -0.45,
+      "sentiment": -0.731,
       "category": "Bias / Microaggression",
       "toxic": true,
-      "weight": -0.45
+      "weight": -0.731
     },
     {
       "reviewer_id": "user_13",
       "target_id": "user_4",
       "target_type": "individual",
       "raw_text": "Fantastic learning opportunities and career growth",
-      "sentiment": 0.6,
+      "sentiment": 0.826,
       "category": "Career Growth",
       "toxic": false,
-      "weight": 0.6
+      "weight": 0.826
     },
     {
       "reviewer_id": "user_14",
       "target_id": "user_12",
       "target_type": "individual",
       "raw_text": "Salary is way below market, no raises in two years",
-      "sentiment": 0.0,
+      "sentiment": -0.566,
       "category": "Career Growth",
-      "toxic": false,
-      "weight": 0.0
+      "toxic": true,
+      "weight": -0.566
     },
     {
       "reviewer_id": "user_15",
       "target_id": "user_9",
       "target_type": "individual",
       "raw_text": "Supportive environment with great mentorship",
-      "sentiment": 1.0,
+      "sentiment": 0.812,
       "category": "Inclusion & Support",
       "toxic": false,
-      "weight": 1.0
+      "weight": 0.812
     },
     {
       "reviewer_id": "user_16",
       "target_id": "user_15",
       "target_type": "individual",
       "raw_text": "Inclusive workplace with collaborative spirit",
-      "sentiment": 0.6,
+      "sentiment": 0.761,
       "category": "Inclusion & Support",
       "toxic": false,
-      "weight": 0.6
+      "weight": 0.761
     },
     {
       "reviewer_id": "user_17",
       "target_id": "user_13",
       "target_type": "individual",
       "raw_text": "The team vibe is amazing and positive",
-      "sentiment": 0.3,
+      "sentiment": 0.826,
       "category": "General",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.826
     },
     {
       "reviewer_id": "user_18",
       "target_id": "team_B1",
       "target_type": "team",
       "raw_text": "Toxic environment, no one supports each other",
-      "sentiment": -0.35,
+      "sentiment": -0.744,
       "category": "General",
       "toxic": true,
-      "weight": -0.35
+      "weight": -0.744
     },
     {
       "reviewer_id": "user_12",
       "target_id": "team_A2",
       "target_type": "team",
-      "raw_text": "No growth opportunities, stuck doing the same work",
-      "sentiment": -0.05,
+      "raw_text": "Salary is way below market, no raises in two years",
+      "sentiment": -0.566,
       "category": "Career Growth",
-      "toxic": false,
-      "weight": -0.05
+      "toxic": true,
+      "weight": -0.566
+    },
+    {
+      "reviewer_id": "user_2",
+      "target_id": "team_B2",
+      "target_type": "team",
+      "raw_text": "Toxic environment, no one supports each other",
+      "sentiment": -0.744,
+      "category": "General",
+      "toxic": true,
+      "weight": -0.744
     },
     {
       "reviewer_id": "user_3",
-      "target_id": "user_2",
+      "target_id": "user_9",
       "target_type": "individual",
-      "raw_text": "Great pay and benefits package overall",
-      "sentiment": 0.3,
-      "category": "Career Growth",
-      "toxic": false,
-      "weight": 0.3
-    },
-    {
-      "reviewer_id": "user_10",
-      "target_id": "user_3",
-      "target_type": "individual",
-      "raw_text": "Lots of opportunity for skill development",
-      "sentiment": 0.3,
-      "category": "Career Growth",
-      "toxic": false,
-      "weight": 0.3
-    },
-    {
-      "reviewer_id": "user_4",
-      "target_id": "user_14",
-      "target_type": "individual",
-      "raw_text": "Toxic environment, no one supports each other",
-      "sentiment": -0.35,
-      "category": "General",
-      "toxic": true,
-      "weight": -0.35
-    },
-    {
-      "reviewer_id": "user_15",
-      "target_id": "team_B1",
-      "target_type": "team",
-      "raw_text": "Very inclusive team environment",
-      "sentiment": 0.3,
+      "raw_text": "The team culture here is vibrant and supportive",
+      "sentiment": 0.822,
       "category": "Inclusion & Support",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.822
     },
     {
-      "reviewer_id": "user_12",
+      "reviewer_id": "user_9",
+      "target_id": "user_16",
+      "target_type": "individual",
+      "raw_text": "Fantastic learning opportunities and career growth",
+      "sentiment": 0.826,
+      "category": "Career Growth",
+      "toxic": false,
+      "weight": 0.826
+    },
+    {
+      "reviewer_id": "user_6",
       "target_id": "user_13",
       "target_type": "individual",
-      "raw_text": "Toxic environment, no one supports each other",
-      "sentiment": -0.35,
+      "raw_text": "Leadership genuinely cares about the team",
+      "sentiment": 0.633,
       "category": "General",
-      "toxic": true,
-      "weight": -0.35
+      "toxic": false,
+      "weight": 0.633
+    },
+    {
+      "reviewer_id": "user_9",
+      "target_id": "team_B3",
+      "target_type": "team",
+      "raw_text": "Leadership genuinely cares about the team",
+      "sentiment": 0.633,
+      "category": "General",
+      "toxic": false,
+      "weight": 0.633
     },
     {
       "reviewer_id": "user_3",
       "target_id": "team_A3",
       "target_type": "team",
       "raw_text": "Fair compensation with regular raises",
-      "sentiment": 0.3,
+      "sentiment": 0.292,
       "category": "Career Growth",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.292
     },
     {
       "reviewer_id": "user_8",
       "target_id": "user_6",
       "target_type": "individual",
       "raw_text": "Competitive salary and great bonus structure",
-      "sentiment": 0.3,
+      "sentiment": 0.716,
       "category": "Career Growth",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.716
     },
     {
       "reviewer_id": "user_18",
       "target_id": "user_8",
       "target_type": "individual",
       "raw_text": "Lots of opportunity for skill development",
-      "sentiment": 0.3,
+      "sentiment": 0.768,
       "category": "Career Growth",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.768
     },
     {
       "reviewer_id": "user_2",
       "target_id": "user_9",
       "target_type": "individual",
-      "raw_text": "Manager constantly ignored my ideas and interrupted me in meetings",
-      "sentiment": -0.7,
-      "category": "Bias / Microaggression",
-      "toxic": true,
-      "weight": -0.7
+      "raw_text": "Great pay and benefits package overall",
+      "sentiment": 0.806,
+      "category": "Career Growth",
+      "toxic": false,
+      "weight": 0.806
     },
     {
       "reviewer_id": "user_11",
       "target_id": "user_14",
       "target_type": "individual",
       "raw_text": "No growth opportunities, stuck doing the same work",
-      "sentiment": -0.05,
+      "sentiment": -0.763,
       "category": "Career Growth",
-      "toxic": false,
-      "weight": -0.05
+      "toxic": true,
+      "weight": -0.763
     },
     {
       "reviewer_id": "user_11",
       "target_id": "user_7",
       "target_type": "individual",
       "raw_text": "The team culture here is vibrant and supportive",
-      "sentiment": 0.3,
+      "sentiment": 0.822,
       "category": "Inclusion & Support",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.822
     },
     {
       "reviewer_id": "user_15",
       "target_id": "user_5",
       "target_type": "individual",
       "raw_text": "No growth opportunities, stuck doing the same work",
-      "sentiment": -0.05,
+      "sentiment": -0.763,
       "category": "Career Growth",
-      "toxic": false,
-      "weight": -0.05
+      "toxic": true,
+      "weight": -0.763
     },
     {
       "reviewer_id": "user_18",
       "target_id": "team_A1",
       "target_type": "team",
       "raw_text": "No mentorship, no learning, no career path",
-      "sentiment": 0.9,
+      "sentiment": -0.682,
       "category": "Inclusion & Support",
-      "toxic": false,
-      "weight": 0.9
+      "toxic": true,
+      "weight": -0.682
     },
     {
       "reviewer_id": "user_14",
       "target_id": "team_A2",
       "target_type": "team",
       "raw_text": "Good leadership, clear direction and fair delegation",
-      "sentiment": 0.6,
+      "sentiment": 0.801,
       "category": "General",
       "toxic": false,
-      "weight": 0.6
+      "weight": 0.801
     },
     {
       "reviewer_id": "user_5",
       "target_id": "user_18",
       "target_type": "individual",
       "raw_text": "Great pay and benefits package overall",
-      "sentiment": 0.3,
+      "sentiment": 0.806,
       "category": "Career Growth",
       "toxic": false,
-      "weight": 0.3
+      "weight": 0.806
     },
     {
       "reviewer_id": "user_2",
       "target_id": "user_5",
       "target_type": "individual",
       "raw_text": "Unfair treatment, clear bias in promotion decisions",
-      "sentiment": -0.45,
+      "sentiment": -0.731,
       "category": "Bias / Microaggression",
       "toxic": true,
-      "weight": -0.45
+      "weight": -0.731
     },
     {
       "reviewer_id": "user_14",
       "target_id": "team_A3",
       "target_type": "team",
       "raw_text": "Manager takes credit for team work and never listens",
-      "sentiment": -0.35,
+      "sentiment": 0.438,
       "category": "Bias / Microaggression",
-      "toxic": true,
-      "weight": -0.35
+      "toxic": false,
+      "weight": 0.438
     },
     {
       "reviewer_id": "user_15",
       "target_id": "user_18",
       "target_type": "individual",
       "raw_text": "Gender bias in hiring and promotion is obvious",
-      "sentiment": -0.7,
+      "sentiment": -0.643,
       "category": "Bias / Microaggression",
       "toxic": true,
-      "weight": -0.7
+      "weight": -0.643
     },
     {
       "reviewer_id": "user_1",
       "target_id": "team_B2",
       "target_type": "team",
       "raw_text": "Leadership genuinely cares about the team",
-      "sentiment": 0.0,
+      "sentiment": 0.633,
       "category": "General",
       "toxic": false,
-      "weight": 0.0
+      "weight": 0.633
     }
   ],
   "relations": [
