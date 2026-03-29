@@ -25,9 +25,12 @@ def get_trust_score(
     """
     # --- Gather all review edges pointing to target_id ---
     all_review_weights = []
+    community_weights = []
     reviews_analyzed = []  # For pattern/risk detection
     toxic_present = False
-    category_counts = {}
+
+    querying_node = G.nodes.get(querying_user_id, {})
+    querying_role = querying_node.get("role", "employee")
 
     for predecessor in G.predecessors(target_id):
         # MultiDiGraph: get_edge_data returns dict of {key: data}
@@ -38,6 +41,11 @@ def get_trust_score(
                     weight = edge_data["weight"]
                     all_review_weights.append(weight)
                     
+                    # Collect for community trust (same role as querying user)
+                    pred_node = G.nodes.get(predecessor, {})
+                    if pred_node.get("role") == querying_role:
+                        community_weights.append(weight)
+
                     # Collect for pattern/risk analysis
                     review_record = {
                         "sentiment": weight,
@@ -49,28 +57,12 @@ def get_trust_score(
                     
                     if edge_data.get("toxic", False):
                         toxic_present = True
-                    cat = edge_data.get("category", "General")
-                    category_counts[cat] = category_counts.get(cat, 0) + 1
 
     # --- Global trust ---
     if all_review_weights:
         global_trust = sum(all_review_weights) / len(all_review_weights)
     else:
         global_trust = 0.0
-
-    # --- Community trust (same role as querying user) ---
-    querying_node = G.nodes.get(querying_user_id, {})
-    querying_role = querying_node.get("role", "employee")
-
-    community_weights = []
-    for predecessor in G.predecessors(target_id):
-        edge_dict = G.get_edge_data(predecessor, target_id)
-        if edge_dict:
-            for key, edge_data in edge_dict.items():
-                if edge_data.get("edge_type") == "review":
-                    pred_node = G.nodes.get(predecessor, {})
-                    if pred_node.get("role") == querying_role:
-                        community_weights.append(edge_data["weight"])
 
     if community_weights:
         community_trust = sum(community_weights) / len(community_weights)
