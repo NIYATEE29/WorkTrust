@@ -3,13 +3,8 @@ db.py — MongoDB-backed data store.
 Fetches dataset from MongoDB and builds graph.
 """
 
-<<<<<<< HEAD
 from pymongo import MongoClient
-=======
-import json
-import os
 import uuid
->>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a
 import networkx as nx
 
 # MongoDB connection
@@ -29,9 +24,9 @@ _graph = None
 
 def _load():
     global _dataset, _graph
-<<<<<<< HEAD
 
-    # 🔹 Fetch from MongoDB
+    from graph.build_graph import build_graph
+
     _dataset = {
         "companies": list(companies_col.find({}, {"_id": 0})),
         "teams": list(teams_col.find({}, {"_id": 0})),
@@ -39,25 +34,7 @@ def _load():
         "reviews": list(reviews_col.find({}, {"_id": 0})),
         "relations": list(relations_col.find({}, {"_id": 0}))
     }
-
-    # 🔹 Build graph (NewForge layer)
-    from graph.build_graph import build_graph
     _graph = build_graph(_dataset)
-=======
-    data_path = os.path.join(
-        os.path.dirname(os.path.dirname(__file__)),
-        "data", "synthetic_dataset.json"
-    )
-    if os.path.exists(data_path):
-        with open(data_path, "r", encoding="utf-8") as f:
-            _dataset = json.load(f)
-        from graph.build_graph import build_graph
-        _graph = build_graph(_dataset)
-    else:
-        # Empty defaults if no dataset yet
-        _dataset = {"companies": [], "teams": [], "users": [], "reviews": [], "relations": []}
-        _graph = nx.MultiDiGraph()
->>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a
 
 
 def get_dataset() -> dict:
@@ -66,13 +43,7 @@ def get_dataset() -> dict:
         _load()
     return _dataset
 
-
-<<<<<<< HEAD
-def get_graph() -> nx.DiGraph:
-    global _graph
-=======
 def get_graph() -> nx.MultiDiGraph:
->>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a
     if _graph is None:
         _load()
     return _graph
@@ -83,9 +54,6 @@ def reload():
     global _dataset, _graph
     _dataset = None
     _graph = None
-<<<<<<< HEAD
-    _load()
-=======
     _load()
 
 
@@ -124,4 +92,3 @@ def register_new_user(name: str, role: str, company_id: str, team_id: str | None
         G.add_edge(uid, company_id, edge_type="member", weight=0.0)
         
     return uid
->>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a
