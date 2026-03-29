@@ -5,6 +5,7 @@ into a final trust score for any entity.
 
 import networkx as nx
 from graph.trust_propagation import get_network_trust
+from backend.trust_engine import detect_pattern, detect_risks
 
 
 def get_trust_score(
@@ -24,6 +25,7 @@ def get_trust_score(
     """
     # --- Gather all review edges pointing to target_id ---
     all_review_weights = []
+    reviews_analyzed = []  # For pattern/risk detection
     toxic_present = False
     category_counts = {}
 
@@ -33,7 +35,18 @@ def get_trust_score(
         if edge_dict:
             for key, edge_data in edge_dict.items():
                 if edge_data.get("edge_type") == "review":
-                    all_review_weights.append(edge_data["weight"])
+                    weight = edge_data["weight"]
+                    all_review_weights.append(weight)
+                    
+                    # Collect for pattern/risk analysis
+                    review_record = {
+                        "sentiment": weight,
+                        "category": edge_data.get("category", "General"),
+                        "toxic": edge_data.get("toxic", False),
+                        "text": edge_data.get("raw_text", "")
+                    }
+                    reviews_analyzed.append(review_record)
+                    
                     if edge_data.get("toxic", False):
                         toxic_present = True
                     cat = edge_data.get("category", "General")
@@ -75,14 +88,16 @@ def get_trust_score(
     # Normalize: assume 15 data points = full confidence
     confidence = min(data_points / 15.0, 1.0)
 
-    # --- Risk flags ---
-    risk_flags = []
-    if toxic_present:
-        risk_flags.append("toxic_reviews_present")
-    if category_counts.get("Bias", 0) >= 2:
-        risk_flags.append("high_bias_signal")
-    if category_counts.get("Harassment", 0) >= 2:
-        risk_flags.append("harassment_pattern")
+    # --- Pattern detection using trust_engine ---
+    pattern_info = detect_pattern(reviews_analyzed)
+    
+    # --- Risk detection using trust_engine ---
+    risk_flags_from_engine = detect_risks(reviews_analyzed)
+
+    # --- Combine with legacy risk flags for backward compatibility ---
+    risk_flags = risk_flags_from_engine.copy()
+    if toxic_present and "Toxicity detected" not in risk_flags:
+        risk_flags.append("Toxicity detected")
     if len(all_review_weights) < 3:
         risk_flags.append("low_data_volume")
 
@@ -92,5 +107,7 @@ def get_trust_score(
         "network_trust": round(network_trust, 3),
         "final_score": round(final_score, 3),
         "confidence": round(confidence, 2),
+        "pattern": pattern_info.get("pattern", "mixed"),
+        "pattern_description": pattern_info.get("description", ""),
         "risk_flags": risk_flags,
     }
