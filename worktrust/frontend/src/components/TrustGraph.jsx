@@ -32,7 +32,7 @@ function edgeNeon(d) {
   return NEON.blue;
 }
 
-export default function TrustGraph({ graphData, highlightNodeId, nameFilter = "" }) {
+export default function TrustGraph({ graphData, highlightNodeId, nameFilter = "", isIndividualView = false }) {
   const ref = useRef(null);
   const navigate = useNavigate();
 
@@ -44,6 +44,10 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
     const linksClean = [];
     const seenE = new Set();
     for (const e of rawEdges) {
+      if (e.edge_type === "review") continue;
+      // Filter out colleague edges ONLY in individual view
+      if (isIndividualView && e.edge_type === "colleague") continue;
+
       if (idSet.has(e.from) && idSet.has(e.to)) {
         const sig = `${e.from}|${e.to}|${e.edge_type}|${e.weight}`;
         if (seenE.has(sig)) continue;
@@ -61,7 +65,7 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
     if (!el || nodes.length === 0) return;
 
     const width = el.clientWidth || 800;
-    const height = 420;
+    const height = 750;
     el.innerHTML = "";
 
     const svg = d3.select(el).append("svg").attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height]);
@@ -209,7 +213,7 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
         className="wt-graph-shell"
         style={{
           width: "100%",
-          height: 600,
+          height: 750,
           background: "linear-gradient(160deg, #050510 0%, #0a0a18 50%, #0f0820 100%)",
           borderRadius: "var(--radius)",
           border: "1px solid rgba(34, 211, 238, 0.15)",
@@ -218,30 +222,35 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
         }}
       />
       <div style={{
-        position: "absolute", bottom: "1rem", left: "1rem",
-        background: "rgba(15, 15, 26, 0.85)", border: "1px solid var(--border)",
-        padding: "0.75rem", borderRadius: "var(--radius)", fontSize: "0.8rem",
-        color: "var(--text)", backdropFilter: "blur(6px)", pointerEvents: "none",
-        boxShadow: "var(--shadow)"
+        position: "absolute", 
+        bottom: "1.5rem", 
+        left: "1.5rem",
+        background: "rgba(10, 10, 22, 0.88)", 
+        border: "1px solid rgba(34, 211, 238, 0.3)",
+        padding: "0.85rem", 
+        borderRadius: "12px", 
+        fontSize: "0.85rem",
+        color: "var(--text)", 
+        backdropFilter: "blur(12px)", 
+        pointerEvents: "none",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5), var(--glow-cyan-sm)",
+        zIndex: 10
       }}>
-        <div style={{ fontWeight: 600, marginBottom: "0.5rem", color: "var(--neon-cyan)" }}>Graph Legend</div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 0, borderTop: "2px dashed var(--trust-pos)" }} /> Positive Review
+        <div style={{ fontWeight: 600, marginBottom: "0.75rem", color: "var(--neon-cyan)", fontSize: "0.95rem" }}>Graph Legend</div>
+        
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
+          <div style={{ width: 18, height: 2, background: "var(--neon-magenta)", borderRadius: 1 }} /> 
+          <span>Friend</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 0, borderTop: "2px dashed var(--trust-neg)" }} /> Negative Review
+
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
+          <div style={{ width: 18, height: 2, background: "#fb923c", borderRadius: 1 }} /> 
+          <span>Manager</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 2, background: "var(--neon-magenta)" }} /> Friend
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 2, background: "var(--neon-cyan)" }} /> Colleague
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-          <div style={{ width: 16, height: 2, background: "#fb923c" }} /> Manager
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <div style={{ width: 16, height: 2, background: "#38bdf8" }} /> Structural Link
+
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{ width: 18, height: 2, background: "#38bdf8", borderRadius: 1 }} /> 
+          <span>Structural Link</span>
         </div>
       </div>
     </div>
