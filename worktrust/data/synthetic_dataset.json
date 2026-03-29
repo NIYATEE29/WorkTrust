@@ -175,634 +175,634 @@
       "target_id": "user_8",
       "target_type": "individual",
       "raw_text": "This person is a bully and made everyone uncomfortable",
-      "sentiment": -0.86,
+      "sentiment": -0.85,
       "category": "Harassment",
-      "toxic": true,
-      "weight": -0.86
-    },
-    {
-      "reviewer_id": "user_4",
-      "target_id": "team_B2",
-      "target_type": "team",
-      "raw_text": "Abusive manager who discriminated against team members openly",
-      "sentiment": -0.65,
-      "category": "Harassment",
-      "toxic": true,
-      "weight": -0.65
-    },
-    {
-      "reviewer_id": "user_1",
-      "target_id": "user_15",
-      "target_type": "individual",
-      "raw_text": "Supportive environment with great mentorship",
-      "sentiment": 0.32,
-      "category": "Growth",
       "toxic": false,
-      "weight": 0.32
-    },
-    {
-      "reviewer_id": "user_2",
-      "target_id": "user_18",
-      "target_type": "individual",
-      "raw_text": "No growth opportunities, stuck doing the same work",
-      "sentiment": -0.5,
-      "category": "Growth",
-      "toxic": false,
-      "weight": -0.5
-    },
-    {
-      "reviewer_id": "user_3",
-      "target_id": "team_B1",
-      "target_type": "team",
-      "raw_text": "Inclusive workplace with collaborative spirit",
-      "sentiment": 0.76,
-      "category": "Culture",
-      "toxic": false,
-      "weight": 0.76
-    },
-    {
-      "reviewer_id": "user_5",
-      "target_id": "team_A2",
-      "target_type": "team",
-      "raw_text": "Manager always listens and values input from everyone",
-      "sentiment": 0.48,
-      "category": "Management",
-      "toxic": false,
-      "weight": 0.48
-    },
-    {
-      "reviewer_id": "user_6",
-      "target_id": "user_7",
-      "target_type": "individual",
-      "raw_text": "Great pay and benefits package overall",
-      "sentiment": 0.75,
-      "category": "Compensation",
-      "toxic": false,
-      "weight": 0.75
-    },
-    {
-      "reviewer_id": "user_7",
-      "target_id": "user_8",
-      "target_type": "individual",
-      "raw_text": "Unfair treatment, clear bias in promotion decisions",
-      "sentiment": -0.23,
-      "category": "Bias",
-      "toxic": false,
-      "weight": -0.23
+      "weight": -0.85
     },
     {
       "reviewer_id": "user_8",
-      "target_id": "user_14",
+      "target_id": "user_5",
       "target_type": "individual",
-      "raw_text": "Salary is way below market, no raises in two years",
-      "sentiment": -0.88,
+      "raw_text": "Abusive manager who discriminated against team members openly",
+      "sentiment": -0.865,
+      "category": "Bias",
+      "toxic": true,
+      "weight": -0.865
+    },
+    {
+      "reviewer_id": "user_1",
+      "target_id": "company_A",
+      "target_type": "company",
+      "raw_text": "Leadership genuinely cares about the team",
+      "sentiment": 0.884,
+      "category": "Management",
+      "toxic": false,
+      "weight": 0.884
+    },
+    {
+      "reviewer_id": "user_2",
+      "target_id": "team_A2",
+      "target_type": "team",
+      "raw_text": "Excellent mentor, helped me grow my skills",
+      "sentiment": 0.94,
+      "category": "Growth",
+      "toxic": false,
+      "weight": 0.94
+    },
+    {
+      "reviewer_id": "user_3",
+      "target_id": "user_4",
+      "target_type": "individual",
+      "raw_text": "Great collaborator, always supportive",
+      "sentiment": 0.943,
+      "category": "Growth",
+      "toxic": false,
+      "weight": 0.943
+    },
+    {
+      "reviewer_id": "user_4",
+      "target_id": "team_A3",
+      "target_type": "team",
+      "raw_text": "Gender bias in hiring and promotion is obvious",
+      "sentiment": -0.888,
+      "category": "Bias",
+      "toxic": true,
+      "weight": -0.888
+    },
+    {
+      "reviewer_id": "user_5",
+      "target_id": "team_B3",
+      "target_type": "team",
+      "raw_text": "No growth opportunities, stuck doing the same work",
+      "sentiment": -0.933,
+      "category": "Management",
+      "toxic": true,
+      "weight": -0.933
+    },
+    {
+      "reviewer_id": "user_6",
+      "target_id": "user_15",
+      "target_type": "individual",
+      "raw_text": "Fair compensation with regular raises",
+      "sentiment": 0.567,
       "category": "Compensation",
       "toxic": false,
-      "weight": -0.88
+      "weight": 0.567
+    },
+    {
+      "reviewer_id": "user_7",
+      "target_id": "user_10",
+      "target_type": "individual",
+      "raw_text": "No mentorship, no learning, no career path",
+      "sentiment": -0.905,
+      "category": "Bias",
+      "toxic": true,
+      "weight": -0.905
     },
     {
       "reviewer_id": "user_10",
-      "target_id": "user_9",
-      "target_type": "individual",
-      "raw_text": "Supportive environment with great mentorship",
-      "sentiment": 0.82,
+      "target_id": "company_B",
+      "target_type": "company",
+      "raw_text": "Great collaborator, always supportive",
+      "sentiment": 0.943,
       "category": "Growth",
       "toxic": false,
-      "weight": 0.82
+      "weight": 0.943
     },
     {
       "reviewer_id": "user_11",
-      "target_id": "user_4",
+      "target_id": "user_15",
       "target_type": "individual",
-      "raw_text": "Fair compensation with regular raises",
-      "sentiment": 0.93,
-      "category": "Compensation",
+      "raw_text": "Inclusive workplace with collaborative spirit",
+      "sentiment": 0.932,
+      "category": "Culture",
       "toxic": false,
-      "weight": 0.93
+      "weight": 0.932
     },
     {
       "reviewer_id": "user_12",
-      "target_id": "user_10",
+      "target_id": "user_7",
       "target_type": "individual",
-      "raw_text": "Fair compensation with regular raises",
-      "sentiment": 0.84,
-      "category": "Compensation",
-      "toxic": false,
-      "weight": 0.84
+      "raw_text": "Unfair treatment, clear bias in promotion decisions",
+      "sentiment": -0.923,
+      "category": "Bias",
+      "toxic": true,
+      "weight": -0.923
     },
     {
       "reviewer_id": "user_13",
-      "target_id": "user_12",
+      "target_id": "user_4",
       "target_type": "individual",
-      "raw_text": "Lots of opportunity for skill development",
-      "sentiment": 0.68,
+      "raw_text": "Fantastic learning opportunities and career growth",
+      "sentiment": 0.949,
       "category": "Growth",
       "toxic": false,
-      "weight": 0.68
+      "weight": 0.949
     },
     {
       "reviewer_id": "user_14",
-      "target_id": "team_B2",
-      "target_type": "team",
-      "raw_text": "Great collaborator, always supportive",
-      "sentiment": 0.45,
-      "category": "Culture",
+      "target_id": "user_12",
+      "target_type": "individual",
+      "raw_text": "Salary is way below market, no raises in two years",
+      "sentiment": -0.847,
+      "category": "Compensation",
       "toxic": false,
-      "weight": 0.45
+      "weight": -0.847
     },
     {
       "reviewer_id": "user_15",
-      "target_id": "user_8",
+      "target_id": "user_9",
       "target_type": "individual",
-      "raw_text": "Salary is way below market, no raises in two years",
-      "sentiment": -0.3,
-      "category": "Compensation",
+      "raw_text": "Supportive environment with great mentorship",
+      "sentiment": 0.945,
+      "category": "Culture",
       "toxic": false,
-      "weight": -0.3
+      "weight": 0.945
     },
     {
       "reviewer_id": "user_16",
-      "target_id": "team_B1",
-      "target_type": "team",
-      "raw_text": "Manager always listens and values input from everyone",
-      "sentiment": 0.84,
-      "category": "Management",
+      "target_id": "user_15",
+      "target_type": "individual",
+      "raw_text": "Inclusive workplace with collaborative spirit",
+      "sentiment": 0.932,
+      "category": "Culture",
       "toxic": false,
-      "weight": 0.84
+      "weight": 0.932
     },
     {
       "reviewer_id": "user_17",
-      "target_id": "user_7",
+      "target_id": "user_13",
       "target_type": "individual",
-      "raw_text": "Leadership plays favourites and ignores merit",
-      "sentiment": -0.45,
-      "category": "Bias",
+      "raw_text": "The team vibe is amazing and positive",
+      "sentiment": 0.948,
+      "category": "Culture",
       "toxic": false,
-      "weight": -0.45
+      "weight": 0.948
     },
     {
       "reviewer_id": "user_18",
       "target_id": "team_B1",
       "target_type": "team",
-      "raw_text": "Leadership genuinely cares about the team",
-      "sentiment": 0.35,
-      "category": "Management",
-      "toxic": false,
-      "weight": 0.35
+      "raw_text": "Toxic environment, no one supports each other",
+      "sentiment": -0.927,
+      "category": "Bias",
+      "toxic": true,
+      "weight": -0.927
     },
     {
-      "reviewer_id": "user_6",
-      "target_id": "team_A1",
+      "reviewer_id": "user_12",
+      "target_id": "team_A2",
       "target_type": "team",
-      "raw_text": "Very inclusive team environment",
-      "sentiment": 0.6,
+      "raw_text": "Salary is way below market, no raises in two years",
+      "sentiment": -0.847,
+      "category": "Compensation",
+      "toxic": false,
+      "weight": -0.847
+    },
+    {
+      "reviewer_id": "user_2",
+      "target_id": "team_B2",
+      "target_type": "team",
+      "raw_text": "Toxic environment, no one supports each other",
+      "sentiment": -0.927,
+      "category": "Bias",
+      "toxic": true,
+      "weight": -0.927
+    },
+    {
+      "reviewer_id": "user_3",
+      "target_id": "user_9",
+      "target_type": "individual",
+      "raw_text": "The team culture here is vibrant and supportive",
+      "sentiment": 0.948,
       "category": "Culture",
       "toxic": false,
-      "weight": 0.6
+      "weight": 0.948
     },
     {
       "reviewer_id": "user_9",
-      "target_id": "team_B1",
-      "target_type": "team",
-      "raw_text": "Good leadership, clear direction and fair delegation",
-      "sentiment": 0.74,
+      "target_id": "user_16",
+      "target_type": "individual",
+      "raw_text": "Fantastic learning opportunities and career growth",
+      "sentiment": 0.949,
+      "category": "Growth",
+      "toxic": false,
+      "weight": 0.949
+    },
+    {
+      "reviewer_id": "user_6",
+      "target_id": "user_13",
+      "target_type": "individual",
+      "raw_text": "Leadership genuinely cares about the team",
+      "sentiment": 0.884,
       "category": "Management",
       "toxic": false,
-      "weight": 0.74
+      "weight": 0.884
+    },
+    {
+      "reviewer_id": "user_9",
+      "target_id": "team_B3",
+      "target_type": "team",
+      "raw_text": "Leadership genuinely cares about the team",
+      "sentiment": 0.884,
+      "category": "Management",
+      "toxic": false,
+      "weight": 0.884
+    },
+    {
+      "reviewer_id": "user_3",
+      "target_id": "team_A3",
+      "target_type": "team",
+      "raw_text": "Fair compensation with regular raises",
+      "sentiment": 0.567,
+      "category": "Compensation",
+      "toxic": false,
+      "weight": 0.567
+    },
+    {
+      "reviewer_id": "user_8",
+      "target_id": "user_6",
+      "target_type": "individual",
+      "raw_text": "Competitive salary and great bonus structure",
+      "sentiment": 0.918,
+      "category": "Compensation",
+      "toxic": false,
+      "weight": 0.918
+    },
+    {
+      "reviewer_id": "user_18",
+      "target_id": "user_8",
+      "target_type": "individual",
+      "raw_text": "Lots of opportunity for skill development",
+      "sentiment": 0.934,
+      "category": "Growth",
+      "toxic": false,
+      "weight": 0.934
     },
     {
       "reviewer_id": "user_2",
       "target_id": "user_9",
       "target_type": "individual",
       "raw_text": "Great pay and benefits package overall",
-      "sentiment": 0.51,
+      "sentiment": 0.944,
       "category": "Compensation",
       "toxic": false,
-      "weight": 0.51
+      "weight": 0.944
     },
     {
-      "reviewer_id": "user_9",
-      "target_id": "user_3",
+      "reviewer_id": "user_11",
+      "target_id": "user_14",
       "target_type": "individual",
-      "raw_text": "No mentorship, no learning, no career path",
-      "sentiment": -0.29,
-      "category": "Growth",
-      "toxic": false,
-      "weight": -0.29
+      "raw_text": "No growth opportunities, stuck doing the same work",
+      "sentiment": -0.933,
+      "category": "Management",
+      "toxic": true,
+      "weight": -0.933
     },
     {
       "reviewer_id": "user_11",
       "target_id": "user_7",
       "target_type": "individual",
       "raw_text": "The team culture here is vibrant and supportive",
-      "sentiment": 0.88,
+      "sentiment": 0.948,
       "category": "Culture",
       "toxic": false,
-      "weight": 0.88
+      "weight": 0.948
     },
     {
       "reviewer_id": "user_15",
       "target_id": "user_5",
       "target_type": "individual",
       "raw_text": "No growth opportunities, stuck doing the same work",
-      "sentiment": -0.39,
-      "category": "Growth",
-      "toxic": false,
-      "weight": -0.39
+      "sentiment": -0.933,
+      "category": "Management",
+      "toxic": true,
+      "weight": -0.933
     },
     {
       "reviewer_id": "user_18",
-      "target_id": "user_9",
-      "target_type": "individual",
-      "raw_text": "The team culture here is vibrant and supportive",
-      "sentiment": 0.88,
-      "category": "Culture",
-      "toxic": false,
-      "weight": 0.88
-    },
-    {
-      "reviewer_id": "user_13",
-      "target_id": "user_12",
-      "target_type": "individual",
-      "raw_text": "Unfair treatment, clear bias in promotion decisions",
-      "sentiment": -0.57,
+      "target_id": "team_A1",
+      "target_type": "team",
+      "raw_text": "No mentorship, no learning, no career path",
+      "sentiment": -0.905,
       "category": "Bias",
-      "toxic": false,
-      "weight": -0.57
+      "toxic": true,
+      "weight": -0.905
     },
     {
-      "reviewer_id": "user_3",
-      "target_id": "company_B",
-      "target_type": "company",
-      "raw_text": "Salary is way below market, no raises in two years",
-      "sentiment": -0.84,
+      "reviewer_id": "user_14",
+      "target_id": "team_A2",
+      "target_type": "team",
+      "raw_text": "Good leadership, clear direction and fair delegation",
+      "sentiment": 0.943,
+      "category": "Management",
+      "toxic": false,
+      "weight": 0.943
+    },
+    {
+      "reviewer_id": "user_5",
+      "target_id": "user_18",
+      "target_type": "individual",
+      "raw_text": "Great pay and benefits package overall",
+      "sentiment": 0.944,
       "category": "Compensation",
       "toxic": false,
-      "weight": -0.84
+      "weight": 0.944
     },
     {
-      "reviewer_id": "user_6",
-      "target_id": "team_B2",
+      "reviewer_id": "user_2",
+      "target_id": "user_5",
+      "target_type": "individual",
+      "raw_text": "Unfair treatment, clear bias in promotion decisions",
+      "sentiment": -0.923,
+      "category": "Bias",
+      "toxic": true,
+      "weight": -0.923
+    },
+    {
+      "reviewer_id": "user_14",
+      "target_id": "team_A3",
       "target_type": "team",
-      "raw_text": "Excellent mentor, helped me grow my skills",
-      "sentiment": 0.55,
-      "category": "Growth",
+      "raw_text": "Manager takes credit for team work and never listens",
+      "sentiment": 0.745,
+      "category": "Management",
       "toxic": false,
-      "weight": 0.55
+      "weight": 0.745
     },
     {
       "reviewer_id": "user_15",
       "target_id": "user_18",
       "target_type": "individual",
       "raw_text": "Gender bias in hiring and promotion is obvious",
-      "sentiment": -0.3,
+      "sentiment": -0.888,
       "category": "Bias",
-      "toxic": false,
-      "weight": -0.3
+      "toxic": true,
+      "weight": -0.888
     },
     {
       "reviewer_id": "user_1",
       "target_id": "team_B2",
       "target_type": "team",
       "raw_text": "Leadership genuinely cares about the team",
-      "sentiment": 0.88,
+      "sentiment": 0.884,
       "category": "Management",
       "toxic": false,
-      "weight": 0.88
-    },
-    {
-      "reviewer_id": "user_9",
-      "target_id": "company_B",
-      "target_type": "company",
-      "raw_text": "Excellent mentor, helped me grow my skills",
-      "sentiment": 0.49,
-      "category": "Growth",
-      "toxic": false,
-      "weight": 0.49
-    },
-    {
-      "reviewer_id": "user_6",
-      "target_id": "user_16",
-      "target_type": "individual",
-      "raw_text": "Pay is terrible and bonuses are non-existent",
-      "sentiment": -0.29,
-      "category": "Compensation",
-      "toxic": false,
-      "weight": -0.29
-    },
-    {
-      "reviewer_id": "user_9",
-      "target_id": "user_18",
-      "target_type": "individual",
-      "raw_text": "Fair compensation with regular raises",
-      "sentiment": 0.89,
-      "category": "Compensation",
-      "toxic": false,
-      "weight": 0.89
-    },
-    {
-      "reviewer_id": "user_10",
-      "target_id": "team_B1",
-      "target_type": "team",
-      "raw_text": "Good leadership, clear direction and fair delegation",
-      "sentiment": 0.4,
-      "category": "Management",
-      "toxic": false,
-      "weight": 0.4
-    },
-    {
-      "reviewer_id": "user_6",
-      "target_id": "team_A1",
-      "target_type": "team",
-      "raw_text": "The team vibe is amazing and positive",
-      "sentiment": 0.64,
-      "category": "Culture",
-      "toxic": false,
-      "weight": 0.64
-    },
-    {
-      "reviewer_id": "user_1",
-      "target_id": "team_A3",
-      "target_type": "team",
-      "raw_text": "Manager constantly ignored my ideas and interrupted me in meetings",
-      "sentiment": -0.87,
-      "category": "Management",
-      "toxic": false,
-      "weight": -0.87
-    },
-    {
-      "reviewer_id": "user_12",
-      "target_id": "user_10",
-      "target_type": "individual",
-      "raw_text": "No growth opportunities, stuck doing the same work",
-      "sentiment": -0.29,
-      "category": "Growth",
-      "toxic": false,
-      "weight": -0.29
-    },
-    {
-      "reviewer_id": "user_3",
-      "target_id": "user_4",
-      "target_type": "individual",
-      "raw_text": "Lots of opportunity for skill development",
-      "sentiment": 0.34,
-      "category": "Growth",
-      "toxic": false,
-      "weight": 0.34
+      "weight": 0.884
     }
   ],
   "relations": [
     {
       "from_id": "user_1",
-      "to_id": "user_6",
-      "edge_type": "manager",
-      "weight": -0.05
+      "to_id": "user_10",
+      "edge_type": "friend",
+      "weight": -0.41
     },
     {
       "from_id": "user_1",
+      "to_id": "user_12",
+      "edge_type": "friend",
+      "weight": -0.09
+    },
+    {
+      "from_id": "user_2",
+      "to_id": "user_10",
+      "edge_type": "manager",
+      "weight": 0.83
+    },
+    {
+      "from_id": "user_2",
+      "to_id": "user_7",
+      "edge_type": "manager",
+      "weight": -0.4
+    },
+    {
+      "from_id": "user_3",
       "to_id": "user_18",
+      "edge_type": "friend",
+      "weight": -0.25
+    },
+    {
+      "from_id": "user_3",
+      "to_id": "user_8",
+      "edge_type": "friend",
+      "weight": 0.08
+    },
+    {
+      "from_id": "user_4",
+      "to_id": "user_18",
+      "edge_type": "manager",
+      "weight": -0.35
+    },
+    {
+      "from_id": "user_4",
+      "to_id": "user_1",
+      "edge_type": "friend",
+      "weight": -0.78
+    },
+    {
+      "from_id": "user_5",
+      "to_id": "user_13",
+      "edge_type": "friend",
+      "weight": -0.88
+    },
+    {
+      "from_id": "user_5",
+      "to_id": "user_11",
+      "edge_type": "manager",
+      "weight": 0.89
+    },
+    {
+      "from_id": "user_6",
+      "to_id": "user_3",
+      "edge_type": "friend",
+      "weight": 0.96
+    },
+    {
+      "from_id": "user_6",
+      "to_id": "user_17",
+      "edge_type": "manager",
+      "weight": 0.53
+    },
+    {
+      "from_id": "user_7",
+      "to_id": "user_5",
       "edge_type": "manager",
       "weight": -0.67
     },
     {
-      "from_id": "user_2",
-      "to_id": "user_18",
-      "edge_type": "friend",
-      "weight": 0.86
+      "from_id": "user_7",
+      "to_id": "user_17",
+      "edge_type": "manager",
+      "weight": 0.74
     },
     {
-      "from_id": "user_2",
+      "from_id": "user_8",
       "to_id": "user_15",
       "edge_type": "manager",
-      "weight": 0.38
+      "weight": 0.51
     },
     {
-      "from_id": "user_3",
+      "from_id": "user_8",
+      "to_id": "user_7",
+      "edge_type": "manager",
+      "weight": -0.6
+    },
+    {
+      "from_id": "user_9",
       "to_id": "user_11",
       "edge_type": "manager",
       "weight": 0.3
     },
     {
-      "from_id": "user_3",
+      "from_id": "user_9",
       "to_id": "user_14",
       "edge_type": "colleague",
       "weight": 0.8
     },
     {
-      "from_id": "user_4",
+      "from_id": "user_10",
       "to_id": "user_16",
       "edge_type": "friend",
       "weight": -0.55
     },
     {
-      "from_id": "user_4",
-      "to_id": "user_5",
+      "from_id": "user_10",
+      "to_id": "user_4",
       "edge_type": "colleague",
       "weight": -0.96
     },
     {
-      "from_id": "user_5",
-      "to_id": "user_9",
+      "from_id": "user_11",
+      "to_id": "user_8",
       "edge_type": "friend",
       "weight": -0.86
     },
     {
-      "from_id": "user_5",
+      "from_id": "user_11",
       "to_id": "user_18",
       "edge_type": "manager",
       "weight": -0.88
     },
     {
-      "from_id": "user_6",
+      "from_id": "user_12",
       "to_id": "user_3",
       "edge_type": "colleague",
       "weight": -0.86
     },
     {
-      "from_id": "user_6",
+      "from_id": "user_12",
       "to_id": "user_2",
       "edge_type": "friend",
       "weight": -0.44
     },
     {
-      "from_id": "user_7",
+      "from_id": "user_13",
       "to_id": "user_17",
       "edge_type": "manager",
       "weight": -0.74
     },
     {
-      "from_id": "user_7",
-      "to_id": "user_8",
+      "from_id": "user_13",
+      "to_id": "user_7",
       "edge_type": "manager",
       "weight": 0.15
     },
     {
-      "from_id": "user_8",
-      "to_id": "user_9",
+      "from_id": "user_14",
+      "to_id": "user_8",
       "edge_type": "colleague",
       "weight": -0.62
     },
     {
-      "from_id": "user_8",
+      "from_id": "user_14",
       "to_id": "user_17",
       "edge_type": "friend",
       "weight": 0.32
     },
     {
-      "from_id": "user_9",
-      "to_id": "user_13",
+      "from_id": "user_15",
+      "to_id": "user_12",
       "edge_type": "colleague",
       "weight": -0.07
     },
     {
-      "from_id": "user_9",
-      "to_id": "user_15",
+      "from_id": "user_15",
+      "to_id": "user_14",
       "edge_type": "manager",
       "weight": -0.89
     },
     {
-      "from_id": "user_10",
+      "from_id": "user_16",
       "to_id": "user_4",
       "edge_type": "colleague",
       "weight": 0.46
     },
     {
-      "from_id": "user_10",
+      "from_id": "user_16",
       "to_id": "user_2",
       "edge_type": "friend",
       "weight": -0.5
     },
     {
-      "from_id": "user_11",
+      "from_id": "user_17",
       "to_id": "user_7",
       "edge_type": "friend",
       "weight": -0.16
     },
     {
-      "from_id": "user_11",
-      "to_id": "user_16",
+      "from_id": "user_17",
+      "to_id": "user_15",
       "edge_type": "colleague",
       "weight": -0.07
     },
     {
-      "from_id": "user_12",
+      "from_id": "user_18",
       "to_id": "user_3",
       "edge_type": "manager",
       "weight": -0.8
     },
     {
-      "from_id": "user_12",
-      "to_id": "user_16",
+      "from_id": "user_18",
+      "to_id": "user_15",
       "edge_type": "manager",
       "weight": 1.0
     },
     {
-      "from_id": "user_13",
-      "to_id": "user_1",
+      "from_id": "user_1",
+      "to_id": "user_4",
       "edge_type": "friend",
       "weight": -0.67
     },
     {
-      "from_id": "user_13",
-      "to_id": "user_3",
-      "edge_type": "colleague",
-      "weight": -0.04
-    },
-    {
-      "from_id": "user_14",
-      "to_id": "user_13",
+      "from_id": "user_16",
+      "to_id": "user_17",
       "edge_type": "friend",
-      "weight": -0.24
+      "weight": 0.73
     },
     {
-      "from_id": "user_14",
-      "to_id": "user_2",
+      "from_id": "user_13",
+      "to_id": "user_1",
       "edge_type": "colleague",
       "weight": -0.47
     },
     {
       "from_id": "user_15",
-      "to_id": "user_16",
+      "to_id": "user_10",
       "edge_type": "colleague",
       "weight": 0.39
     },
     {
-      "from_id": "user_15",
-      "to_id": "user_10",
-      "edge_type": "manager",
-      "weight": 0.99
-    },
-    {
-      "from_id": "user_16",
-      "to_id": "user_17",
-      "edge_type": "friend",
-      "weight": -0.41
-    },
-    {
-      "from_id": "user_16",
-      "to_id": "user_5",
-      "edge_type": "friend",
-      "weight": 0.16
-    },
-    {
-      "from_id": "user_17",
-      "to_id": "user_2",
-      "edge_type": "friend",
-      "weight": -0.9
-    },
-    {
-      "from_id": "user_17",
-      "to_id": "user_11",
-      "edge_type": "colleague",
-      "weight": 0.01
-    },
-    {
       "from_id": "user_18",
-      "to_id": "user_17",
-      "edge_type": "friend",
-      "weight": 0.92
-    },
-    {
-      "from_id": "user_18",
-      "to_id": "user_6",
-      "edge_type": "friend",
-      "weight": 0.7
-    },
-    {
-      "from_id": "user_3",
-      "to_id": "user_4",
-      "edge_type": "manager",
-      "weight": 0.72
-    },
-    {
-      "from_id": "user_13",
-      "to_id": "user_4",
-      "edge_type": "manager",
-      "weight": -0.51
-    },
-    {
-      "from_id": "user_2",
-      "to_id": "user_4",
-      "edge_type": "colleague",
-      "weight": 0.31
-    },
-    {
-      "from_id": "user_9",
-      "to_id": "user_7",
-      "edge_type": "manager",
-      "weight": 0.43
-    },
-    {
-      "from_id": "user_8",
-      "to_id": "user_10",
-      "edge_type": "colleague",
-      "weight": -0.74
-    },
-    {
-      "from_id": "user_10",
       "to_id": "user_16",
-      "edge_type": "colleague",
-      "weight": 0.86
+      "edge_type": "friend",
+      "weight": -0.62
+    },
+    {
+      "from_id": "user_7",
+      "to_id": "user_2",
+      "edge_type": "manager",
+      "weight": 0.47
     }
   ]
 }
