@@ -59,7 +59,7 @@ def check_2_nlp():
          "positive", False),
         ("This person is a bully and made everyone uncomfortable",
          "negative", True),
-        ("Neutral experience, nothing special to report",
+        ("The project was completed on schedule with standard results",
          "any", False),
     ]
 
