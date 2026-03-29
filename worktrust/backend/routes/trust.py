@@ -25,5 +25,7 @@ def get_trust(target_id: str, user_id: str = Query(..., description="Querying us
         "network_trust": result["network_trust"],
         "final_score": result["final_score"],
         "confidence": result["confidence"],
-        "risk_flags": result["risk_flags"],
+        "pattern": result.get("pattern", "mixed"),
+        "pattern_description": result.get("pattern_description", ""),
+        "risk_flags": result.get("risk_flags", []),
     }

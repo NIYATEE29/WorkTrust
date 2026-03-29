@@ -1,14 +1,23 @@
 """
-toxicity.py — Simple keyword-based toxicity detection.
+toxicity.py — Keyword-based toxicity detection.
+Identifies toxic language patterns based on predefined keyword lists.
 """
 
-TOXIC_KEYWORDS = [
-    "harass", "bully", "threat", "hostile", "toxic",
-    "abuse", "discriminat", "sexist", "racist",
-]
+from nlp.scoring_config import TOXICITY_KEYWORDS, TOXICITY_THRESHOLD
 
 
 def is_toxic(text: str) -> bool:
-    """Return True if any toxic keyword is found in the lowercased text."""
+    """
+    Return True if text contains toxic keywords or has very negative sentiment.
+    A separate sentiment score can also be passed for threshold-based detection.
+    """
     text_lower = text.lower()
-    return any(kw in text_lower for kw in TOXIC_KEYWORDS)
+    return any(kw in text_lower for kw in TOXICITY_KEYWORDS)
+
+
+def is_toxic_by_sentiment(sentiment_score: float) -> bool:
+    """
+    Return True if sentiment score is below toxicity threshold.
+    Used as complement to keyword-based detection.
+    """
+    return sentiment_score < TOXICITY_THRESHOLD
