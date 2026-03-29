@@ -223,12 +223,6 @@ def generate_dataset() -> dict:
     print(f"  Reviews   : {len(reviews)}")
     print(f"  Relations : {len(relations)}")
 
-    # Save
-    out_path = os.path.join(os.path.dirname(__file__), "synthetic_dataset.json")
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(dataset, f, indent=2)
-
-    print(f"[dataset_generator] Saved to data/synthetic_dataset.json ✓")
     return dataset
 
 

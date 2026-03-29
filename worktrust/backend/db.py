@@ -1,13 +1,11 @@
 """
-db.py — Data store.
-Fetches dataset from MongoDB (if populated) or JSON, and builds graph.
+db.py — MongoDB-backed data store.
+Fetches dataset from MongoDB and builds graph.
 """
 
-import json
-import os
+from pymongo import MongoClient
 import uuid
 import networkx as nx
-from pymongo import MongoClient
 
 # MongoDB connection
 client = MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=2000)
@@ -26,34 +24,16 @@ _graph = None
 
 def _load():
     global _dataset, _graph
-    
-    # Try fetching from MongoDB first
-    try:
-        companies = list(companies_col.find({}, {"_id": 0}))
-        users = list(users_col.find({}, {"_id": 0}))
-        if users:  # MongoDB is populated
-            _dataset = {
-                "companies": companies,
-                "teams": list(teams_col.find({}, {"_id": 0})),
-                "users": users,
-                "reviews": list(reviews_col.find({}, {"_id": 0})),
-                "relations": list(relations_col.find({}, {"_id": 0}))
-            }
-        else:
-            raise Exception("MongoDB is empty")
-    except Exception:
-        # Fallback to local JSON if MongoDB is unavailable or empty
-        data_path = os.path.join(
-            os.path.dirname(os.path.dirname(__file__)),
-            "data", "synthetic_dataset.json"
-        )
-        if os.path.exists(data_path):
-            with open(data_path, "r", encoding="utf-8") as f:
-                _dataset = json.load(f)
-        else:
-            _dataset = {"companies": [], "teams": [], "users": [], "reviews": [], "relations": []}
 
     from graph.build_graph import build_graph
+
+    _dataset = {
+        "companies": list(companies_col.find({}, {"_id": 0})),
+        "teams": list(teams_col.find({}, {"_id": 0})),
+        "users": list(users_col.find({}, {"_id": 0})),
+        "reviews": list(reviews_col.find({}, {"_id": 0})),
+        "relations": list(relations_col.find({}, {"_id": 0}))
+    }
     _graph = build_graph(_dataset)
 
 
@@ -106,17 +86,17 @@ def register_new_user(name: str, role: str, company_id: str, team_id: str | None
         team_id=team_id,
         company_id=company_id,
     )
-    
+
     # Add structural edges for visualization and hierarchy
     if team_id:
         G.add_edge(uid, team_id, edge_type="member", weight=0.0)
     elif company_id:
         G.add_edge(uid, company_id, edge_type="member", weight=0.0)
-        
-    # Also save to MongoDB if available
+
+    # Persist to MongoDB
     try:
         users_col.insert_one(row.copy())
     except Exception:
         pass
-        
+
     return uid
