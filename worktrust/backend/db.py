@@ -1,19 +1,16 @@
 """
-db.py — MongoDB-backed data store.
-Fetches dataset from MongoDB and builds graph.
+db.py — Data store.
+Fetches dataset from MongoDB (if populated) or JSON, and builds graph.
 """
 
-<<<<<<< HEAD
-from pymongo import MongoClient
-=======
 import json
 import os
 import uuid
->>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a
 import networkx as nx
+from pymongo import MongoClient
 
 # MongoDB connection
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=2000)
 db = client["worktrust"]
 # Collections
 companies_col = db["companies"]
@@ -29,35 +26,35 @@ _graph = None
 
 def _load():
     global _dataset, _graph
-<<<<<<< HEAD
+    
+    # Try fetching from MongoDB first
+    try:
+        companies = list(companies_col.find({}, {"_id": 0}))
+        users = list(users_col.find({}, {"_id": 0}))
+        if users:  # MongoDB is populated
+            _dataset = {
+                "companies": companies,
+                "teams": list(teams_col.find({}, {"_id": 0})),
+                "users": users,
+                "reviews": list(reviews_col.find({}, {"_id": 0})),
+                "relations": list(relations_col.find({}, {"_id": 0}))
+            }
+        else:
+            raise Exception("MongoDB is empty")
+    except Exception:
+        # Fallback to local JSON if MongoDB is unavailable or empty
+        data_path = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)),
+            "data", "synthetic_dataset.json"
+        )
+        if os.path.exists(data_path):
+            with open(data_path, "r", encoding="utf-8") as f:
+                _dataset = json.load(f)
+        else:
+            _dataset = {"companies": [], "teams": [], "users": [], "reviews": [], "relations": []}
 
-    # 🔹 Fetch from MongoDB
-    _dataset = {
-        "companies": list(companies_col.find({}, {"_id": 0})),
-        "teams": list(teams_col.find({}, {"_id": 0})),
-        "users": list(users_col.find({}, {"_id": 0})),
-        "reviews": list(reviews_col.find({}, {"_id": 0})),
-        "relations": list(relations_col.find({}, {"_id": 0}))
-    }
-
-    # 🔹 Build graph (NewForge layer)
     from graph.build_graph import build_graph
     _graph = build_graph(_dataset)
-=======
-    data_path = os.path.join(
-        os.path.dirname(os.path.dirname(__file__)),
-        "data", "synthetic_dataset.json"
-    )
-    if os.path.exists(data_path):
-        with open(data_path, "r", encoding="utf-8") as f:
-            _dataset = json.load(f)
-        from graph.build_graph import build_graph
-        _graph = build_graph(_dataset)
-    else:
-        # Empty defaults if no dataset yet
-        _dataset = {"companies": [], "teams": [], "users": [], "reviews": [], "relations": []}
-        _graph = nx.MultiDiGraph()
->>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a
 
 
 def get_dataset() -> dict:
@@ -67,12 +64,8 @@ def get_dataset() -> dict:
     return _dataset
 
 
-<<<<<<< HEAD
-def get_graph() -> nx.DiGraph:
-    global _graph
-=======
 def get_graph() -> nx.MultiDiGraph:
->>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a
+    global _graph
     if _graph is None:
         _load()
     return _graph
@@ -83,9 +76,6 @@ def reload():
     global _dataset, _graph
     _dataset = None
     _graph = None
-<<<<<<< HEAD
-    _load()
-=======
     _load()
 
 
@@ -123,5 +113,10 @@ def register_new_user(name: str, role: str, company_id: str, team_id: str | None
     elif company_id:
         G.add_edge(uid, company_id, edge_type="member", weight=0.0)
         
+    # Also save to MongoDB if available
+    try:
+        users_col.insert_one(row.copy())
+    except Exception:
+        pass
+        
     return uid
->>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a
