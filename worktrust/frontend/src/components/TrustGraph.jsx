@@ -32,7 +32,7 @@ function edgeNeon(d) {
   return NEON.blue;
 }
 
-export default function TrustGraph({ graphData, highlightNodeId, nameFilter = "", isIndividualView = false, teamOnlyMode = false }) {
+export default function TrustGraph({ graphData, highlightNodeId, nameFilter = "", isIndividualView = false, teamOnlyMode = false, companyOnlyMode = false }) {
   const ref = useRef(null);
   const navigate = useNavigate();
 
@@ -41,26 +41,15 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
   const { nodes, links } = useMemo(() => {
     let nodesCopy = rawNodes.map((n) => ({ ...n }));
     
-    // Team-only mode: filter to show only team, its members, and parent company
-    if (teamOnlyMode && highlightNodeId) {
-      const teamNode = nodesCopy.find((n) => n.id === highlightNodeId && n.type === "team");
-      if (teamNode && teamNode.company_id) {
-        // Keep team node, all users with matching team_id, and the company node
-        nodesCopy = nodesCopy.filter((n) => {
-          if (n.id === highlightNodeId) return true; // Keep team
-          if (n.id === teamNode.company_id) return true; // Keep parent company
-          if (n.type === "user" && n.team_id === highlightNodeId) return true; // Keep team members
-          return false;
-        });
-      }
-    }
+    // Node set is now primarily pre-filtered by the backend when mode=company/team is used.
+    // We keep local filtering only for Individual View or Name Filter to maintain safety.
     
     const idSet = new Set(nodesCopy.map((n) => n.id));
+
     const linksClean = [];
     const seenE = new Set();
     for (const e of rawEdges) {
       if (e.edge_type === "review") continue;
-      // Filter out colleague edges ONLY in individual view
       if (isIndividualView && e.edge_type === "colleague") continue;
 
       if (idSet.has(e.from) && idSet.has(e.to)) {
@@ -71,12 +60,14 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
       }
     }
     return { nodes: nodesCopy, links: linksClean };
-  }, [rawNodes, rawEdges, teamOnlyMode, highlightNodeId]);
+  }, [rawNodes, rawEdges, teamOnlyMode, companyOnlyMode, highlightNodeId, isIndividualView]);
 
   const filterLower = nameFilter.toLowerCase();
+  const isDashboardView = teamOnlyMode || companyOnlyMode;
 
   useEffect(() => {
     const el = ref.current;
+// ... (rest of useEffect remains mostly same, but using isDashboardView for labels)
     if (!el || nodes.length === 0) return;
 
     const width = el.clientWidth || 800;
@@ -145,18 +136,25 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
         (d.id && d.id.toLowerCase().includes(filterLower));
       const dim = filterLower && !match ? 0.15 : 1;
       const isHi = highlightNodeId && d.id === highlightNodeId;
-      // In team-only mode, all visible nodes are highlighted
-      const isTeamModeHi = teamOnlyMode && (d.id === highlightNodeId || d.type === "user" || d.type === "company");
+      // In dashboard mode, visible parent/child nodes are also highlighted
+      const isDashboardHi = isDashboardView && (
+        d.id === highlightNodeId || 
+        d.type === "team" || 
+        d.type === "user" || 
+        d.type === "company"
+      );
+
+      
       const fill = nodeFill(d);
 
       if (d.type === "user") {
         base
           .append("circle")
-          .attr("r", isTeamModeHi ? 22 : 18)
+          .attr("r", isDashboardHi ? 22 : 18)
           .attr("fill", fill)
           .attr("opacity", dim)
-          .attr("stroke", isHi || isTeamModeHi ? NEON.cyan : "rgba(34,211,238,0.5)")
-          .attr("stroke-width", isHi || isTeamModeHi ? 3 : 1.5)
+          .attr("stroke", isHi || isDashboardHi ? NEON.cyan : "rgba(34,211,238,0.5)")
+          .attr("stroke-width", isHi || isDashboardHi ? 3 : 1.5)
           .attr("filter", "url(#wt-neon-glow)");
       } else {
         const w = d.type === "company" ? 100 : 72;
@@ -170,8 +168,8 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
           .attr("rx", 8)
           .attr("fill", fill)
           .attr("opacity", dim)
-          .attr("stroke", isHi || isTeamModeHi ? NEON.magenta : "rgba(255,43,214,0.45)")
-          .attr("stroke-width", isHi || isTeamModeHi ? 3 : 1.5)
+          .attr("stroke", isHi || isDashboardHi ? NEON.magenta : "rgba(255,43,214,0.45)")
+          .attr("stroke-width", isHi || isDashboardHi ? 3 : 1.5)
           .attr("filter", "url(#wt-neon-glow)");
       }
 
@@ -201,7 +199,7 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
     return () => {
       simulation.stop();
     };
-  }, [nodes, links, navigate, filterLower, highlightNodeId, teamOnlyMode]);
+  }, [nodes, links, navigate, filterLower, highlightNodeId, teamOnlyMode, companyOnlyMode, isDashboardView]);
 
   if (!rawNodes?.length) {
     return (
@@ -255,15 +253,19 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
       }}>
         <div style={{ fontWeight: 600, marginBottom: "0.75rem", color: "var(--neon-cyan)", fontSize: "0.95rem" }}>Graph Legend</div>
         
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
-          <div style={{ width: 18, height: 2, background: "var(--neon-magenta)", borderRadius: 1 }} /> 
-          <span>Friend</span>
-        </div>
+        {!isDashboardView && (
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
+            <div style={{ width: 18, height: 2, background: "var(--neon-magenta)", borderRadius: 1 }} /> 
+            <span>Friend</span>
+          </div>
+        )}
 
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
-          <div style={{ width: 18, height: 2, background: "#fb923c", borderRadius: 1 }} /> 
-          <span>Manager</span>
-        </div>
+        {!isDashboardView && (
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
+            <div style={{ width: 18, height: 2, background: "#fb923c", borderRadius: 1 }} /> 
+            <span>Manager</span>
+          </div>
+        )}
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <div style={{ width: 18, height: 2, background: "#38bdf8", borderRadius: 1 }} /> 
@@ -273,3 +275,4 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
     </div>
   );
 }
+

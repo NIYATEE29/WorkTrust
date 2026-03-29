@@ -57,12 +57,14 @@ export async function apiGetTrust(targetId, userId) {
   return parseJson(res);
 }
 
-export async function apiGetGraph(targetId, userId) {
-  let url = `${BASE}/graph/${encodeURIComponent(targetId)}`;
-  if (userId) url += `?user_id=${encodeURIComponent(userId)}`;
-  const res = await fetch(url, { headers: getHeaders() });
+export async function apiGetGraph(targetId, userId, mode) {
+  let url = `${BASE}/graph/${encodeURIComponent(targetId)}?`;
+  if (userId) url += `user_id=${encodeURIComponent(userId)}&`;
+  if (mode) url += `mode=${encodeURIComponent(mode)}&`;
+  const res = await fetch(url.replace(/[?&]$/, ""), { headers: getHeaders() });
   return parseJson(res);
 }
+
 
 export async function apiSubmitReview(body) {
   const res = await fetch(`${BASE}/review`, {

@@ -23,13 +23,13 @@ export default function TeamPage() {
       const t = await apiGetTeam(id);
       if (c) setTeam(t);
       if (user?.id) {
-        const [tr, g] = await Promise.all([apiGetTrust(id, user.id), apiGetGraph(id, user.id)]);
+        const [tr, g] = await Promise.all([apiGetTrust(id, user.id), apiGetGraph(id, user.id, "team")]);
         if (c) {
           setScores(tr.error ? null : tr);
           setGraph(g.error ? { nodes: [], edges: [] } : g);
         }
       } else {
-        const g = await apiGetGraph(id, null);
+        const g = await apiGetGraph(id, null, "team");
         if (c) setGraph(g.error ? { nodes: [], edges: [] } : g);
       }
     })();

@@ -30,14 +30,14 @@ export default function CompanyPage() {
       if (user?.id) {
         const [t, g] = await Promise.all([
           apiGetTrust(id, user.id),
-          apiGetGraph(id, user.id),
+          apiGetGraph(id, user.id, "company"),
         ]);
         if (c) {
           setScores(t.error ? null : t);
           setGraph(g.error ? { nodes: [], edges: [] } : g);
         }
       } else {
-        const g = await apiGetGraph(id, null);
+        const g = await apiGetGraph(id, null, "company");
         if (c) setGraph(g.error ? { nodes: [], edges: [] } : g);
       }
     })();
@@ -88,7 +88,7 @@ export default function CompanyPage() {
 
         <div style={{ marginBottom: "1rem" }}>
           <GraphSearchBar onFilterChange={setGraphFilter} />
-          <TrustGraph graphData={graph} nameFilter={graphFilter} />
+          <TrustGraph graphData={graph} nameFilter={graphFilter} companyOnlyMode={true} highlightNodeId={id} />
         </div>
 
         <h2 style={{ fontSize: "1.1rem" }}>Teams</h2>
