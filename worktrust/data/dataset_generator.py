@@ -1,64 +1,63 @@
 """
 dataset_generator.py — Generates synthetic_dataset.json for WorkTrust MVP.
+Uses the real NLP pipeline (VADER sentiment, keyword category, keyword toxicity)
+to score every review.
 """
 
 import json
 import random
 import os
+import sys
+
+# Ensure the worktrust root is on the path so we can import nlp.*
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from nlp.nlp_processing import process_review
 
 # Seed for reproducibility
 random.seed(42)
 
-# --- Raw review templates ---
+# --- Raw review templates (text only, NLP will derive sentiment/category/toxicity) ---
 POSITIVE_REVIEWS = [
-    ("Great collaborator, always supportive", "Culture"),
-    ("Excellent mentor, helped me grow my skills", "Growth"),
-    ("Very inclusive team environment", "Culture"),
-    ("Good leadership, clear direction and fair delegation", "Management"),
-    ("Competitive salary and great bonus structure", "Compensation"),
-    ("Fantastic learning opportunities and career growth", "Growth"),
-    ("The team culture here is vibrant and supportive", "Culture"),
-    ("Manager always listens and values input from everyone", "Management"),
-    ("Fair compensation with regular raises", "Compensation"),
-    ("Supportive environment with great mentorship", "Growth"),
-    ("Leadership genuinely cares about the team", "Management"),
-    ("Inclusive workplace with collaborative spirit", "Culture"),
-    ("Great pay and benefits package overall", "Compensation"),
-    ("Lots of opportunity for skill development", "Growth"),
-    ("The team vibe is amazing and positive", "Culture"),
+    "Great collaborator, always supportive",
+    "Excellent mentor, helped me grow my skills",
+    "Very inclusive team environment",
+    "Good leadership, clear direction and fair delegation",
+    "Competitive salary and great bonus structure",
+    "Fantastic learning opportunities and career growth",
+    "The team culture here is vibrant and supportive",
+    "Manager always listens and values input from everyone",
+    "Fair compensation with regular raises",
+    "Supportive environment with great mentorship",
+    "Leadership genuinely cares about the team",
+    "Inclusive workplace with collaborative spirit",
+    "Great pay and benefits package overall",
+    "Lots of opportunity for skill development",
+    "The team vibe is amazing and positive",
 ]
 
 NEGATIVE_REVIEWS = [
-    ("Manager constantly ignored my ideas and interrupted me in meetings", "Management"),
-    ("Salary is way below market, no raises in two years", "Compensation"),
-    ("Unfair treatment, clear bias in promotion decisions", "Bias"),
-    ("No growth opportunities, stuck doing the same work", "Growth"),
-    ("Toxic environment, no one supports each other", "Culture"),
-    ("Leadership plays favourites and ignores merit", "Bias"),
-    ("Manager takes credit for team work and never listens", "Management"),
-    ("Underpaid compared to industry standards", "Compensation"),
-    ("Gender bias in hiring and promotion is obvious", "Bias"),
-    ("No mentorship, no learning, no career path", "Growth"),
-    ("The boss ignored all feedback and ran the show alone", "Management"),
-    ("Pay is terrible and bonuses are non-existent", "Compensation"),
+    "Manager constantly ignored my ideas and interrupted me in meetings",
+    "Salary is way below market, no raises in two years",
+    "Unfair treatment, clear bias in promotion decisions",
+    "No growth opportunities, stuck doing the same work",
+    "Toxic environment, no one supports each other",
+    "Leadership plays favourites and ignores merit",
+    "Manager takes credit for team work and never listens",
+    "Underpaid compared to industry standards",
+    "Gender bias in hiring and promotion is obvious",
+    "No mentorship, no learning, no career path",
+    "The boss ignored all feedback and ran the show alone",
+    "Pay is terrible and bonuses are non-existent",
 ]
 
 TOXIC_REVIEWS = [
-    ("This person is a bully and made everyone uncomfortable", "Harassment"),
-    ("Hostile work environment with constant threats from leadership", "Harassment"),
-    ("Experienced harassment from a senior colleague, felt unsafe", "Harassment"),
-    ("Racist and sexist remarks were tolerated by management", "Harassment"),
-    ("Abusive manager who discriminated against team members openly", "Harassment"),
+    "This person is a bully and made everyone uncomfortable",
+    "Hostile work environment with constant threats from leadership",
+    "Experienced harassment from a senior colleague, felt unsafe",
+    "Racist and sexist remarks were tolerated by management",
+    "Abusive manager who discriminated against team members openly",
 ]
-
-# --- Sentiment approximations for pre-generated reviews ---
-def _approx_sentiment(category: str, is_positive: bool, is_toxic: bool) -> float:
-    if is_toxic:
-        return round(random.uniform(-0.95, -0.55), 2)
-    if is_positive:
-        return round(random.uniform(0.3, 0.95), 2)
-    else:
-        return round(random.uniform(-0.95, -0.2), 2)
 
 
 FIRST_NAMES = [
@@ -108,29 +107,34 @@ def generate_dataset() -> dict:
     company_ids = [c["id"] for c in companies]
     all_target_ids = user_ids + team_ids + company_ids
 
+    # --- Helper to build a review dict using the real NLP pipeline ---
+    def _make_review(reviewer_id, target_id, text):
+        target_type = "individual" if target_id.startswith("user_") else (
+            "team" if target_id.startswith("team_") else "company")
+        nlp = process_review(text)
+        return {
+            "reviewer_id": reviewer_id,
+            "target_id": target_id,
+            "target_type": target_type,
+            "raw_text": text,
+            "sentiment": round(nlp["sentiment"], 3),
+            "category": nlp["category"],
+            "toxic": nlp["toxic"],
+            "weight": round(nlp["weight"], 3),
+        }
+
     # --- Reviews ---
     reviews = []
-    toxic_count = 0
-    negative_count = 0
+
+    def _count_negatives():
+        return sum(1 for r in reviews if r["sentiment"] < 0)
 
     # Guarantee at least 2 toxic reviews first
-    for toxic_text, toxic_cat in random.sample(TOXIC_REVIEWS, 2):
+    for toxic_text in random.sample(TOXIC_REVIEWS, 2):
         reviewer = random.choice(user_ids)
         target = random.choice([t for t in all_target_ids if t != reviewer])
-        target_type = "individual" if target.startswith("user_") else ("team" if target.startswith("team_") else "company")
-        sentiment = _approx_sentiment(toxic_cat, False, True)
-        reviews.append({
-            "reviewer_id": reviewer,
-            "target_id": target,
-            "target_type": target_type,
-            "raw_text": toxic_text,
-            "sentiment": sentiment,
-            "category": toxic_cat,
-            "toxic": True,
-            "weight": sentiment,
-        })
-        toxic_count += 1
-        negative_count += 1
+        rev = _make_review(reviewer, target, toxic_text)
+        reviews.append(rev)
 
     # Ensure every user has at least 1 review
     for uid in user_ids:
@@ -138,58 +142,36 @@ def generate_dataset() -> dict:
         if not has_review:
             # Decide positive vs negative
             if random.random() < 0.35:
-                text, cat = random.choice(NEGATIVE_REVIEWS)
-                is_pos, is_tox = False, False
-                negative_count += 1
+                text = random.choice(NEGATIVE_REVIEWS)
             else:
-                text, cat = random.choice(POSITIVE_REVIEWS)
-                is_pos, is_tox = True, False
+                text = random.choice(POSITIVE_REVIEWS)
             target = random.choice([t for t in all_target_ids if t != uid])
-            target_type = "individual" if target.startswith("user_") else ("team" if target.startswith("team_") else "company")
-            sentiment = _approx_sentiment(cat, is_pos, is_tox)
-            reviews.append({
-                "reviewer_id": uid,
-                "target_id": target,
-                "target_type": target_type,
-                "raw_text": text,
-                "sentiment": sentiment,
-                "category": cat,
-                "toxic": is_tox,
-                "weight": sentiment,
-            })
+            reviews.append(_make_review(uid, target, text))
 
     # Add more reviews to reach ~38 total, ensuring >=30% negative
     target_total = 38
     while len(reviews) < target_total:
         reviewer = random.choice(user_ids)
         target = random.choice([t for t in all_target_ids if t != reviewer])
-        target_type = "individual" if target.startswith("user_") else ("team" if target.startswith("team_") else "company")
 
         # Force negative if we need more to reach 30%
-        neg_ratio = negative_count / len(reviews) if reviews else 0
+        neg_ratio = _count_negatives() / len(reviews) if reviews else 0
         if neg_ratio < 0.3:
-            text, cat = random.choice(NEGATIVE_REVIEWS)
-            is_pos, is_tox = False, False
-            negative_count += 1
+            text = random.choice(NEGATIVE_REVIEWS)
         elif random.random() < 0.35:
-            text, cat = random.choice(NEGATIVE_REVIEWS)
-            is_pos, is_tox = False, False
-            negative_count += 1
+            text = random.choice(NEGATIVE_REVIEWS)
         else:
-            text, cat = random.choice(POSITIVE_REVIEWS)
-            is_pos, is_tox = True, False
+            text = random.choice(POSITIVE_REVIEWS)
 
-        sentiment = _approx_sentiment(cat, is_pos, is_tox)
-        reviews.append({
-            "reviewer_id": reviewer,
-            "target_id": target,
-            "target_type": target_type,
-            "raw_text": text,
-            "sentiment": sentiment,
-            "category": cat,
-            "toxic": is_tox,
-            "weight": sentiment,
-        })
+        reviews.append(_make_review(reviewer, target, text))
+
+    # Safety pass: if VADER scored some negative texts positively,
+    # keep adding more negative reviews until we actually hit 30%
+    while _count_negatives() / len(reviews) < 0.3:
+        reviewer = random.choice(user_ids)
+        target = random.choice([t for t in all_target_ids if t != reviewer])
+        text = random.choice(NEGATIVE_REVIEWS + TOXIC_REVIEWS)
+        reviews.append(_make_review(reviewer, target, text))
 
     # --- Relations ---
     relations = []

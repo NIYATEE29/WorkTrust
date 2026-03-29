@@ -1,0 +1,177 @@
+:root {
+  /* Dark cyberpunk base */
+  --bg: #050510;
+  --bg-elevated: #0f0f1a;
+  --bg-panel: #12121f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --primary: #7c3aed;
+  --accent: #d946ef;
+  --neon-magenta: #ff2bd6;
+  --neon-cyan: #22d3ee;
+  --neon-magenta-dim: rgba(255, 43, 214, 0.35);
+  --neon-cyan-dim: rgba(34, 211, 238, 0.35);
+  --card-bg: #12121f;
+  --border: rgba(34, 211, 238, 0.2);
+  --star-fill: #fbbf24;
+  --star-empty: #475569;
+  --trust-pos: #22c55e;
+  --trust-mid: #f59e0b;
+  --trust-neg: #ef4444;
+  --danger: #f87171;
+  --radius: 8px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  --glow-magenta: 0 0 12px var(--neon-magenta-dim), 0 0 24px rgba(255, 43, 214, 0.15);
+  --glow-cyan: 0 0 12px var(--neon-cyan-dim), 0 0 24px rgba(34, 211, 238, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #67e8f9;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.wt-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 2rem;
+}
+
+.wt-btn {
+  background: linear-gradient(135deg, var(--primary), #5b21b6);
+  color: #fff;
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  box-shadow: var(--glow-cyan);
+}
+
+.wt-btn:hover {
+  filter: brightness(1.12);
+}
+
+.wt-btn--ghost {
+  background: transparent;
+  color: var(--neon-cyan);
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  box-shadow: none;
+}
+
+.wt-btn--accent {
+  background: linear-gradient(135deg, var(--neon-magenta), #a21caf);
+  border-color: rgba(255, 43, 214, 0.4);
+  box-shadow: var(--glow-magenta);
+}
+
+.wt-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wt-input,
+.wt-select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font: inherit;
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+.wt-input:focus,
+.wt-select:focus {
+  outline: none;
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 0 2px var(--neon-cyan-dim);
+}
+
+.wt-input::placeholder {
+  color: var(--text-muted);
+}
+
+.wt-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.wt-card-link {
+  display: block;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.wt-card-link:hover {
+  border-color: rgba(34, 211, 238, 0.45);
+  box-shadow: var(--glow-cyan);
+}
+
+.wt-muted {
+  color: var(--text-muted);
+}
+
+.wt-error {
+  color: var(--danger);
+}
+
+.wt-toast-wrap {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+}
+
+.wt-toast {
+  background: var(--bg-panel);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow), var(--glow-cyan);
+  border: 1px solid var(--border);
+  animation: wt-in 0.2s ease;
+}
+
+.wt-toast--err {
+  background: #450a0a;
+  border-color: rgba(248, 113, 113, 0.4);
+  box-shadow: 0 0 16px rgba(248, 113, 113, 0.2);
+}
+
+@keyframes wt-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
