@@ -32,14 +32,29 @@ function edgeNeon(d) {
   return NEON.blue;
 }
 
-export default function TrustGraph({ graphData, highlightNodeId, nameFilter = "", isIndividualView = false }) {
+export default function TrustGraph({ graphData, highlightNodeId, nameFilter = "", isIndividualView = false, teamOnlyMode = false }) {
   const ref = useRef(null);
   const navigate = useNavigate();
 
   const { nodes: rawNodes, edges: rawEdges } = graphData || { nodes: [], edges: [] };
 
   const { nodes, links } = useMemo(() => {
-    const nodesCopy = rawNodes.map((n) => ({ ...n }));
+    let nodesCopy = rawNodes.map((n) => ({ ...n }));
+    
+    // Team-only mode: filter to show only team, its members, and parent company
+    if (teamOnlyMode && highlightNodeId) {
+      const teamNode = nodesCopy.find((n) => n.id === highlightNodeId && n.type === "team");
+      if (teamNode && teamNode.company_id) {
+        // Keep team node, all users with matching team_id, and the company node
+        nodesCopy = nodesCopy.filter((n) => {
+          if (n.id === highlightNodeId) return true; // Keep team
+          if (n.id === teamNode.company_id) return true; // Keep parent company
+          if (n.type === "user" && n.team_id === highlightNodeId) return true; // Keep team members
+          return false;
+        });
+      }
+    }
+    
     const idSet = new Set(nodesCopy.map((n) => n.id));
     const linksClean = [];
     const seenE = new Set();
@@ -56,7 +71,7 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
       }
     }
     return { nodes: nodesCopy, links: linksClean };
-  }, [rawNodes, rawEdges]);
+  }, [rawNodes, rawEdges, teamOnlyMode, highlightNodeId]);
 
   const filterLower = nameFilter.toLowerCase();
 
@@ -130,16 +145,18 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
         (d.id && d.id.toLowerCase().includes(filterLower));
       const dim = filterLower && !match ? 0.15 : 1;
       const isHi = highlightNodeId && d.id === highlightNodeId;
+      // In team-only mode, all visible nodes are highlighted
+      const isTeamModeHi = teamOnlyMode && (d.id === highlightNodeId || d.type === "user" || d.type === "company");
       const fill = nodeFill(d);
 
       if (d.type === "user") {
         base
           .append("circle")
-          .attr("r", 18)
+          .attr("r", isTeamModeHi ? 22 : 18)
           .attr("fill", fill)
           .attr("opacity", dim)
-          .attr("stroke", isHi ? NEON.cyan : "rgba(34,211,238,0.5)")
-          .attr("stroke-width", isHi ? 3 : 1.5)
+          .attr("stroke", isHi || isTeamModeHi ? NEON.cyan : "rgba(34,211,238,0.5)")
+          .attr("stroke-width", isHi || isTeamModeHi ? 3 : 1.5)
           .attr("filter", "url(#wt-neon-glow)");
       } else {
         const w = d.type === "company" ? 100 : 72;
@@ -153,8 +170,8 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
           .attr("rx", 8)
           .attr("fill", fill)
           .attr("opacity", dim)
-          .attr("stroke", isHi ? NEON.magenta : "rgba(255,43,214,0.45)")
-          .attr("stroke-width", isHi ? 3 : 1.5)
+          .attr("stroke", isHi || isTeamModeHi ? NEON.magenta : "rgba(255,43,214,0.45)")
+          .attr("stroke-width", isHi || isTeamModeHi ? 3 : 1.5)
           .attr("filter", "url(#wt-neon-glow)");
       }
 
@@ -184,7 +201,7 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
     return () => {
       simulation.stop();
     };
-  }, [nodes, links, navigate, filterLower, highlightNodeId]);
+  }, [nodes, links, navigate, filterLower, highlightNodeId, teamOnlyMode]);
 
   if (!rawNodes?.length) {
     return (
