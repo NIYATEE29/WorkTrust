@@ -87,7 +87,7 @@ export default function UserProfile() {
 
         <div style={{ marginBottom: "1rem" }}>
           <GraphSearchBar onFilterChange={setGraphFilter} />
-          <TrustGraph graphData={graph} nameFilter={graphFilter} />
+          <TrustGraph graphData={graph} nameFilter={graphFilter} isIndividualView={true} />
         </div>
 
         <h2 style={{ fontSize: "1.1rem" }}>Reviews</h2>
@@ -96,11 +96,9 @@ export default function UserProfile() {
             <div key={i} style={{ padding: "0.5rem 0", borderBottom: i < profile.reviews.length - 1 ? "1px solid rgba(34, 211, 238, 0.12)" : "none" }}>
               <span style={{ color: "var(--star-fill)" }}>★ {r.rating}</span>
               {r.anonymous ? (
-                <span style={{ marginLeft: 8 }}>Anonymous</span>
+                <span style={{ marginLeft: 8, opacity: 0.7, fontStyle: "italic" }}>Hidden Review</span>
               ) : (
-                <>
-                  {r.text ? ` "${r.text}"` : ""} — {r.reviewer_name || "Reviewer"}
-                </>
+                r.text ? ` "${r.text}"` : ""
               )}
             </div>
           ))}
