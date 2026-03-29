@@ -3,11 +3,16 @@ weight_calculator.py — Core scoring formula.
 Computes weighted score based on relation distance and review counts.
 """
 
+# Multiplier parameters for the scoring formula: (a, b, c)
+# a = relation multiplier, b = negative review multiplier, c = positive review multiplier
+CLOSE_PARAMS = (0.9, 0.8, 0.5)
+DISTANT_PARAMS = (0.3, 0.8, 0.7)
+
 
 def compute_weighted_score(
     relation_weight: float,
-    negative_reviews: list,
-    positive_reviews: list,
+    negative_reviews: list[float],
+    positive_reviews: list[float],
 ) -> dict:
     """
     Compute weighted trust score.
@@ -25,10 +30,10 @@ def compute_weighted_score(
         else          → "uncertain"
     """
     if relation_weight > 0.5:
-        a, b, c = 0.9, 0.8, 0.5
+        a, b, c = CLOSE_PARAMS
         case_used = 1
     else:
-        a, b, c = 0.3, 0.8, 0.7
+        a, b, c = DISTANT_PARAMS
         case_used = 2
 
     neg_sum = sum(negative_reviews)

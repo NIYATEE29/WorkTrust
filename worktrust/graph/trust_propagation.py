@@ -5,6 +5,7 @@ finds reachable users who have review edges to target,
 and computes average contribution.
 """
 
+from collections import deque
 import networkx as nx
 
 
@@ -44,16 +45,16 @@ def get_network_trust(G, querying_user_id: str, target_id: str) -> float:
 
     # BFS up to depth 3 via relation edges
     visited = set()
-    queue = [(querying_user_id, 0)]
+    queue = deque([(querying_user_id, 0)])
     reachable = {}  # user_id → relation_weight from querying_user
 
     while queue:
-        current, depth = queue.pop(0)
+        current, depth = queue.popleft()
         if current in visited:
             continue
         visited.add(current)
 
-        if depth > 3:
+        if depth >= 3:
             continue
 
         # Get outgoing relation edges from current
