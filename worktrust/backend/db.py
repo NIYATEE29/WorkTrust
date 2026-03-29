@@ -16,6 +16,7 @@ teams_col = db["teams"]
 users_col = db["users"]
 reviews_col = db["reviews"]
 relations_col = db["relations"]
+auth_accounts_col = db["auth_accounts"]
 
 # Globals
 _dataset = None

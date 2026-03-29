@@ -8,13 +8,19 @@ from typing import Optional
 from fastapi import APIRouter
 from pydantic import BaseModel, field_validator
 
-from backend.db import get_dataset, register_new_user
+from backend.db import get_dataset, register_new_user, auth_accounts_col
 
 router = APIRouter(tags=["auth"])
 
-# email -> account record
-_users: dict[str, dict] = {}
 _otp_by_email: dict[str, str] = {}
+
+
+def _get_user(email: str) -> dict | None:
+    return auth_accounts_col.find_one({"email": email}, {"_id": 0})
+
+
+def _save_user(email: str, record: dict) -> None:
+    auth_accounts_col.update_one({"email": email}, {"$set": record}, upsert=True)
 
 
 class RegisterBody(BaseModel):
@@ -71,7 +77,7 @@ def _resolve_names(dataset: dict, company_id: str, team_id: Optional[str]) -> tu
 @router.post("/register")
 def register(body: RegisterBody):
     email = body.email.lower().strip()
-    if email in _users:
+    if _get_user(email):
         return {"error": "User already exists"}
 
     dataset = get_dataset()
@@ -91,7 +97,8 @@ def register(body: RegisterBody):
         team_id=body.team_id,
     )
 
-    _users[email] = {
+    _save_user(email, {
+        "email": email,
         "password": body.password,
         "name": body.name.strip(),
         "verified": False,
@@ -99,7 +106,7 @@ def register(body: RegisterBody):
         "role": body.designation.strip(),
         "company_id": body.company_id,
         "team_id": body.team_id,
-    }
+    })
     _otp_by_email[email] = "123456"
     return {
         "message": "Registered. OTP sent (stubbed).",
@@ -111,7 +118,7 @@ def register(body: RegisterBody):
 @router.post("/login")
 def login(body: LoginBody):
     email = body.email.lower().strip()
-    u = _users.get(email)
+    u = _get_user(email)
     if not u:
         return {"error": "User not found"}
     if u["password"] != body.password:
@@ -135,21 +142,21 @@ def login(body: LoginBody):
 @router.post("/verify-otp")
 def verify_otp(body: VerifyOtpBody):
     email = body.company_email.lower().strip()
-    u = _users.get(email)
+    u = _get_user(email)
     if not u:
         return {"error": "User not found"}
     if u.get("user_id") != body.user_id:
         return {"error": "User mismatch"}
     if _otp_by_email.get(email) != body.otp and body.otp != "123456":
         return {"error": "Invalid OTP"}
-    u["verified"] = True
+    _save_user(email, {"verified": True})
     return {"message": "Verified successfully"}
 
 
 @router.post("/send-otp")
 def send_otp(body: SendOtpBody):
     email = body.company_email.lower().strip()
-    if email not in _users:
+    if not _get_user(email):
         return {"error": "User not found"}
     _otp_by_email[email] = "123456"
     return {"message": "OTP sent (stubbed)", "otp": "123456"}
