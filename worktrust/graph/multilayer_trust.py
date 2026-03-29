@@ -79,6 +79,7 @@ def get_trust_score(
     data_points = len(all_review_weights) + len(community_weights) + (1 if network_trust != 0 else 0)
     # Normalize: assume 15 data points = full confidence
     confidence = min(data_points / 15.0, 1.0)
+    not_enough_data = (data_points == 0)
 
     # --- Pattern detection using trust_engine ---
     pattern_info = detect_pattern(reviews_analyzed)
@@ -102,4 +103,5 @@ def get_trust_score(
         "pattern": pattern_info.get("pattern", "mixed"),
         "pattern_description": pattern_info.get("description", ""),
         "risk_flags": risk_flags,
+        "not_enough_data": not_enough_data,
     }

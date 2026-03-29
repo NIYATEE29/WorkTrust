@@ -86,11 +86,11 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
         d3
           .forceLink(links)
           .id((d) => d.id)
-          .distance(90)
+          .distance(150)
       )
-      .force("charge", d3.forceManyBody().strength(-240))
+      .force("charge", d3.forceManyBody().strength(-350))
       .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("collision", d3.forceCollide().radius(30));
+      .force("collision", d3.forceCollide().radius(45));
 
     const linkSel = g
       .append("g")
@@ -203,18 +203,47 @@ export default function TrustGraph({ graphData, highlightNodeId, nameFilter = ""
   }
 
   return (
-    <div
-      ref={ref}
-      className="wt-graph-shell"
-      style={{
-        width: "100%",
-        minHeight: 420,
-        background: "linear-gradient(160deg, #050510 0%, #0a0a18 50%, #0f0820 100%)",
-        borderRadius: "var(--radius)",
-        border: "1px solid rgba(34, 211, 238, 0.15)",
-        boxShadow: "var(--glow-cyan), inset 0 0 60px rgba(255, 43, 214, 0.04)",
-        overflow: "hidden",
-      }}
-    />
+    <div style={{ position: "relative" }}>
+      <div
+        ref={ref}
+        className="wt-graph-shell"
+        style={{
+          width: "100%",
+          height: 600,
+          background: "linear-gradient(160deg, #050510 0%, #0a0a18 50%, #0f0820 100%)",
+          borderRadius: "var(--radius)",
+          border: "1px solid rgba(34, 211, 238, 0.15)",
+          boxShadow: "var(--glow-cyan), inset 0 0 60px rgba(255, 43, 214, 0.04)",
+          overflow: "hidden",
+        }}
+      />
+      <div style={{
+          position: "absolute", bottom: "1rem", left: "1rem",
+          background: "rgba(15, 15, 26, 0.85)", border: "1px solid var(--border)",
+          padding: "0.75rem", borderRadius: "var(--radius)", fontSize: "0.8rem",
+          color: "var(--text)", backdropFilter: "blur(6px)", pointerEvents: "none",
+          boxShadow: "var(--shadow)"
+      }}>
+        <div style={{ fontWeight: 600, marginBottom: "0.5rem", color: "var(--neon-cyan)" }}>Graph Legend</div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
+          <div style={{ width: 16, height: 0, borderTop: "2px dashed var(--trust-pos)" }}/> Positive Review
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
+          <div style={{ width: 16, height: 0, borderTop: "2px dashed var(--trust-neg)" }}/> Negative Review
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
+          <div style={{ width: 16, height: 2, background: "var(--neon-magenta)" }}/> Friend
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
+          <div style={{ width: 16, height: 2, background: "var(--neon-cyan)" }}/> Colleague
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
+          <div style={{ width: 16, height: 2, background: "#fb923c" }}/> Manager
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <div style={{ width: 16, height: 2, background: "#38bdf8" }}/> Structural Link
+        </div>
+      </div>
+    </div>
   );
 }

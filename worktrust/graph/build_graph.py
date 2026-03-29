@@ -21,12 +21,19 @@ def build_graph(dataset: dict) -> nx.MultiDiGraph:
     for team in dataset.get("teams", []):
         G.add_node(team["id"], type="team", name=team["name"],
                    company_id=team["company_id"])
+        # Structural link: Team -> Company
+        G.add_edge(team["id"], team["company_id"], edge_type="member", weight=0.0)
 
     # --- Add user nodes ---
     for user in dataset.get("users", []):
         G.add_node(user["id"], type="user", name=user["name"],
                    role=user["role"], team_id=user["team_id"],
                    company_id=user["company_id"])
+        # Structural link: User -> Team (or Company if no team)
+        if user.get("team_id"):
+            G.add_edge(user["id"], user["team_id"], edge_type="member", weight=0.0)
+        elif user.get("company_id"):
+            G.add_edge(user["id"], user["company_id"], edge_type="member", weight=0.0)
 
     # --- Add review edges ---
     for review in dataset.get("reviews", []):

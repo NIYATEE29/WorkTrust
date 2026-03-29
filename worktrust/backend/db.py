@@ -116,5 +116,12 @@ def register_new_user(name: str, role: str, company_id: str, team_id: str | None
         team_id=team_id,
         company_id=company_id,
     )
+    
+    # Add structural edges for visualization and hierarchy
+    if team_id:
+        G.add_edge(uid, team_id, edge_type="member", weight=0.0)
+    elif company_id:
+        G.add_edge(uid, company_id, edge_type="member", weight=0.0)
+        
     return uid
 >>>>>>> 0f2cf78f8f2083789bd66513e21d12892d27c24a

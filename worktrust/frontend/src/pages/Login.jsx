@@ -35,25 +35,30 @@ export default function Login() {
   return (
     <>
       <Navbar />
-      <div className="wt-container" style={{ maxWidth: 400 }}>
-        <h1 style={{ marginTop: 0 }}>Log in</h1>
-        <form onSubmit={submit}>
-          <label style={{ display: "block", marginBottom: "0.75rem" }}>
-            <span className="wt-muted">Email</span>
-            <input className="wt-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
-          </label>
-          <label style={{ display: "block", marginBottom: "0.75rem" }}>
-            <span className="wt-muted">Password</span>
-            <input className="wt-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" />
-          </label>
-          {err && <div className="wt-error" style={{ marginBottom: "0.75rem" }}>{err}</div>}
-          <button type="submit" className="wt-btn">
-            Log in
-          </button>
-        </form>
-        <p style={{ marginTop: "1rem" }}>
-          No account? <Link to="/register">Register</Link>
-        </p>
+      <div className="wt-container" style={{ maxWidth: 460, marginTop: "4rem" }}>
+        <div className="wt-card">
+          <h1 style={{ marginTop: 0, textAlign: "center", color: "var(--neon-cyan)", textShadow: "var(--glow-cyan)" }}>
+            Welcome Back
+          </h1>
+          <p className="wt-muted" style={{ textAlign: "center", marginBottom: "2rem" }}>Log in to access your trust dashboard.</p>
+          <form onSubmit={submit}>
+            <label style={{ display: "block", marginBottom: "1rem" }}>
+              <span className="wt-muted" style={{ display: "block", marginBottom: "0.25rem" }}>Email</span>
+              <input className="wt-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" placeholder="you@worktrust.com" />
+            </label>
+            <label style={{ display: "block", marginBottom: "1.5rem" }}>
+              <span className="wt-muted" style={{ display: "block", marginBottom: "0.25rem" }}>Password</span>
+              <input className="wt-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" placeholder="••••••••" />
+            </label>
+            {err && <div className="wt-error" style={{ marginBottom: "1rem", textAlign: "center" }}>{err}</div>}
+            <button type="submit" className="wt-btn" style={{ width: "100%", padding: "0.75rem", fontSize: "1.1rem" }}>
+              LOG IN
+            </button>
+          </form>
+          <p style={{ marginTop: "1.5rem", textAlign: "center" }}>
+            <span className="wt-muted">No account?</span> <Link to="/register" style={{ fontWeight: 600 }}>Register</Link>
+          </p>
+        </div>
       </div>
     </>
   );
