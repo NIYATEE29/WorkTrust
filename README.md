@@ -127,3 +127,72 @@ This design ensures:
 ---
 
 ## Project Structure
+```
+worktrust/
+│── backend/
+│   ├── api/              
+│   ├── models/           
+│   ├── services/         
+│   ├── graph/            
+│   └── auth/             
+│
+│── frontend/
+│   ├── components/       
+│   ├── pages/            
+│   ├── graph/            
+│   └── utils/            
+│
+│── nlp/
+│   ├── sentiment.py      
+│   ├── classification.py 
+│   └── toxicity.py       
+│
+└── README.md
+```
+
+---
+
+## Setup and Installation
+
+### Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## Environment Configuration
+
+Create a `.env` file in the backend directory:
+
+```
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_secret_key
+OTP_API_KEY=your_otp_service_key
+```
+
+---
+
+## Future Work
+
+- Integration of Graph Neural Networks (GNNs) for improved trust modeling  
+- Real-time anomaly detection for emerging risks  
+- Recommendation system for safe workplaces  
+- Privacy-preserving learning approaches  
+- Mobile application support  
+
+---
+## Impact
+
+WorkTrust provides a structured and data-driven approach to workplace transparency, with a focus on improving safety and equity for women. By combining AI, graph analytics, and anonymous reporting, the platform enables identification of patterns that are often difficult to detect through isolated experiences.
